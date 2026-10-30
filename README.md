@@ -205,6 +205,22 @@ cd frontend && npm install && npm run dev   # second terminal: http://localhost:
 curl -s localhost:8000/requests -H 'content-type: application/json' -d @data/track3/requests/R01.json
 ```
 
+**Filter by main diagnosis:** this request counts heart failure stays per hospital. Use this wording for now: other wordings go to staff review and return no numbers.
+```bash
+curl -s localhost:8000/requests -H 'content-type: application/json' -d '{
+  "id": "J01",
+  "applicant": {"name": "Dr. Test", "organisation": "Public health institute", "country": "AT"},
+  "requested_as": "health data request",
+  "purpose": "We study heart failure hospital care to plan public health capacity.",
+  "question": "How many inpatient stays in 2025 had heart failure as the main diagnosis, per hospital?",
+  "definitions": [
+    "Heart failure stay = encounter with type '"'"'inpatient'"'"', whose primary_icd10 starts with I50.",
+    "Count stays (not patients) whose start_date is in 2025.",
+    "Report per data_holder: heart failure stays."
+  ]
+}'
+```
+
 | Command | What it does |
 |---|---|
 | `make metrics` | R01–R10 against `expected.json`, 3 runs |
