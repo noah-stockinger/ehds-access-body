@@ -1,5 +1,7 @@
 # Health Data Access Body
 
+**[▶ Try it out right now](https://spare-love-inclusive-postage.trycloudflare.com/apply)** (online until 22:00 Vienna time, 30 Oct) &nbsp;**or**&nbsp; **[Set it up yourself](#run-it-yourself)**
+
 ### Every EHDS data request decided in about two seconds. Every article cited. Every number safe. A human signs off every time.
 
 **AIM Healthcare Hackathon Vienna 2026 · Track 3: European Health Data Space**
