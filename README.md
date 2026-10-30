@@ -1,5 +1,7 @@
 # Health Data Access Body
 
+![Staff console: an officer opens a proposed rejection, filters the inbox, then confirms and releases a statistics request](docs/img/simple-staff-view.gif)
+
 **[▶ Try it out right now](https://spare-love-inclusive-postage.trycloudflare.com/apply)** (online until 22:00 Vienna time, 30 Oct) &nbsp;**or**&nbsp; **[Set it up yourself](#run-it-yourself)**
 
 ### Every EHDS data request decided in about two seconds. Every article cited. Every number safe. A human signs off every time.
@@ -17,8 +19,6 @@
 - [Run it yourself](#run-it-yourself): five commands
 - [What works and what does not](#what-works-and-what-does-not): the limits, stated plainly
 - [Find your way around](#find-your-way-around): specs, decisions, API, test reports
-
-![Staff console: an officer opens a proposed rejection, filters the inbox, then confirms and releases a statistics request](docs/img/simple-staff-view.gif)
 
 > **Demo video:** ⏳ link added at submission
 
