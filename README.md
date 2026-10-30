@@ -10,7 +10,7 @@
 
 ![Staff console: R02 proposed for rejection under Art. 54(1)(b), with the reason, the mode and the officer's decision buttons](docs/img/staff-reject.png)
 
-> **Demo video:** ⏳ link added at submission · **Metrics:** [results on the 10 requests](#metric-results) · **Run it:** [four commands](#run-it-yourself)
+> **Demo video:** ⏳ link added at submission · **Metrics:** [results on the 10 requests](#metric-results) · **Run it:** [five commands](#run-it-yourself)
 
 ## Why this one
 
@@ -164,16 +164,19 @@ Everything we run ourselves is open source. Our code is [MIT](LICENSE). The host
 
 ## Run it yourself
 
-You need [`uv`](https://docs.astral.sh/uv/) and Node. **No API key is needed** for rules-only mode, which still scores 10/10 and 6/6.
+You need [`uv`](https://docs.astral.sh/uv/) and Node. **For the best experience we highly recommend a TypeSafe key and an Anthropic key:** they power the purpose reader (Jev) and the writing help (Claude), exactly as in the live demo. If you prefer self-hosting, both can be replaced with open-source endpoints.
 
 ```bash
 git clone --recursive https://github.com/noah-stockinger/ehds-access-body.git && cd ehds-access-body
 uv sync
-make seed KEV_MODE=off && make dev KEV_MODE=off ASSIST_ENABLED=false    # API on :8000, docs at /docs
-cd frontend && npm install && npm run dev                               # second terminal: http://localhost:5173
+cp .env.example .env                        # add TYPESAFE_API_KEY and ANTHROPIC_API_KEY
+make seed && make dev                       # API on :8000, docs at /docs
+cd frontend && npm install && npm run dev   # second terminal: http://localhost:5173
 ```
 
-**The full demo:** `cp .env.example .env`, add `TYPESAFE_API_KEY` and `ANTHROPIC_API_KEY`, then run plain `make seed && make dev`. Without the keys, plain `make dev` still decides correctly but flags every request for review (`Rules only (Jev unreachable)`), so use the commands above.
+**Self-hosted:** `make seed KEV_PROVIDER=kev && make dev KEV_PROVIDER=kev ASSIST_PROVIDER=ollama` uses Kev-4B and Qwen3.8 27B instead. See [Models](#models-flagship-today-your-own-hardware-tomorrow) for what each one needs and how it compares.
+
+**No keys:** `make seed KEV_MODE=off && make dev KEV_MODE=off ASSIST_ENABLED=false` runs the rules alone, without purpose reading or writing help. Plain `make dev` without keys flags every request for review (`Rules only (Jev unreachable)`).
 
 **RStudio in the SPE** needs Docker: `make spe-image`, once.
 
