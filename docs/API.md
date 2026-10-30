@@ -17,7 +17,7 @@ reads one of these endpoints; the frontend only renders. Shapes: `src/hdab/contr
 | `GET /applicant/requests` | applicant: list (demo, no applicant accounts) | `[{id, received, organisation, requested_as, status, decision}]`; `decision` is `null` while proposed, so a proposal stays hidden |
 | `GET /staff/queue` | staff: queue | `[{id, received, organisation, decision, needs_review, status, mode}]` |
 | `GET /staff/requests/{id}` | staff: one request | `request`, `answer` (full: `trace`, `review_reasons`, `signals`, `plan_text`, `notes`, `unclaimed_words`, `permit`), `proposal` (the app's original), `status`, `staff`, `received`, `decided`, `log` |
-| `POST /staff/requests/{id}/confirm` `{staff?}` | staff: confirm | the confirmed `Answer`; releases numbers and SPE access |
+| `POST /staff/requests/{id}/confirm` `{staff?}` | staff: confirm | the confirmed `Answer`; releases numbers and SPE access; 409 for an `APPROVE_SPE` with no permit (S-018) |
 | `POST /staff/requests/{id}/override` `{staff, decision, reason, articles}` | staff: override | the new `Answer`; leaving `APPROVE_SPE` deletes the SPE (logged); moving to `APPROVE_SPE` creates one |
 | `POST /demo/reset` | none (demo clean slate) | `{requests: [ids]}`; only R01–R10 remain, as proposals; deletes other applications, staff decisions, SPEs and the audit log |
 | `GET /register/{id}/log` | staff: audit log | `[{ts, actor, action, detail}]`: one entry per rule step (`rule_checked`), model answer with its instructions and input (`model_answered`), `definitions_read`, `definition_warning`, `review_reason`, `signal`, `numbers_computed`, the SQL behind the numbers with whether it reproduces them (`query_run`), `decided`, and every staff and SPE action. Never numbers (S-071) |

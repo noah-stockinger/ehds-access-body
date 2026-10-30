@@ -36,9 +36,9 @@ def decide(request: Request) -> Answer:
         problems.append("S-059: the report asks for patient-level output, which a statistical answer never contains")
     if answer.decision == "APPROVE_SPE":
         if plan.cohort is None:
-            problems.append("S-018: an SPE needs a cohort definition (\"Cohort = …\")")
+            problems.append("S-018: A secure environment needs a line saying which patients to include, such as \"Cohort = adults with type 2 diabetes.\"")
         elif not spe.record_types(request, plan):
-            problems.append("S-018: the request does not say which record types the SPE should hold")
+            problems.append("S-018: The question or purpose must name the record types the secure environment should hold: conditions, medications or measurements.")
     problems += sanity.check(request, plan, spe=answer.decision == "APPROVE_SPE")  # does the request make sense?
     answer.plan_text, answer.unclaimed_words = plan.render(), plan.unclaimed_words
     answer.unclaimed_parts = [part for part, _ in plan.unclaimed]
@@ -100,6 +100,8 @@ def reset() -> list[str]:
 
 def confirm(request_id: str, staff: str) -> Answer:
     entry = register.get(request_id)
+    if entry["answer"].decision == "APPROVE_SPE" and not entry["answer"].permit:
+        raise ValueError("No data permit can be issued for this application as written. Ask the applicant to correct it, or override.")
     register.set_status(request_id, entry["answer"], "confirmed", staff)
     register.log(request_id, staff, "confirmed", {"decision": entry["answer"].decision})
     return entry["answer"]

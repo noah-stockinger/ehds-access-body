@@ -193,7 +193,10 @@ def staff_view(request_id: str) -> dict:
 @app.post("/staff/requests/{request_id}/confirm")
 def confirm(request_id: str, body: Confirm) -> Answer:
     entry_or_404(request_id)
-    return pipeline.confirm(request_id, officer(body.staff))
+    try:
+        return pipeline.confirm(request_id, officer(body.staff))
+    except ValueError as e:
+        raise HTTPException(409, str(e)) from e
 
 
 @app.post("/staff/requests/{request_id}/override")

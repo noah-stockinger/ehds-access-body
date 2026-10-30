@@ -131,6 +131,7 @@ function Detail({ id, officer, onChange }: { id: string; officer: string; onChan
   if (!view.data) return <div className="panel"><Loading what={id} /></div>
   const v = view.data
   const a = v.answer
+  const noPermit = a.decision === 'APPROVE_SPE' && !a.permit
   const r = v.request
 
   async function act(run: () => Promise<unknown>) {
@@ -161,8 +162,9 @@ function Detail({ id, officer, onChange }: { id: string; officer: string; onChan
         {v.status === 'overridden' && (
           <p className="small muted">The rules first proposed: {DECISION_LABEL[v.proposal.decision]} (Art. {v.proposal.articles.join(', ')}).</p>
         )}
+        {noPermit && <p className="callout warn small">No data permit can be issued for this application as written, so it cannot be confirmed. Ask the applicant to correct it, or override.</p>}
         <div className="actions">
-          {v.status === 'proposed' && (
+          {v.status === 'proposed' && !noPermit && (
             <button type="button" className={`btn ${a.decision === 'REJECT' ? 'danger' : 'go'}`} disabled={busy}
               onClick={() => act(() => api.confirm(id, officer))}>{busy ? 'Saving…' : CONFIRM_LABEL[a.decision]}</button>
           )}

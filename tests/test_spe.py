@@ -65,3 +65,14 @@ def test_s020_s081_download_always_refused_with_art73_text_and_logged():
 def test_s076_spe_closed_until_staff_confirm():
     client.post("/requests", json=R05.model_dump())
     assert client.get("/spe/R05", params={"user": APPLICANT}).status_code == 403
+
+
+def test_s018_spe_without_a_cohort_cannot_be_confirmed():
+    draft = R05.model_copy(update={"id": "R05-NC", "definitions": [d for d in R05.definitions if not d.startswith("Cohort") and "size of the cohort" not in d]})
+    assert any(r.startswith("S-018: ") for r in client.post("/precheck", json=draft.model_dump()).json()["review_reasons"])
+    answer = client.post("/requests", json=draft.model_dump()).json()
+    assert answer["decision"] == "APPROVE_SPE" and answer["permit"] is None
+    r = client.post("/staff/requests/R05-NC/confirm", json={"staff": "officer.a"})
+    assert r.status_code == 409 and "No data permit" in r.json()["detail"]
+    assert client.get("/staff/requests/R05-NC").json()["status"] == "proposed"
+    assert not any(e["action"] == "confirmed" for e in client.get("/register/R05-NC/log").json())

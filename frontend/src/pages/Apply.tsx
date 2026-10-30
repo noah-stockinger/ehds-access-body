@@ -291,7 +291,7 @@ function HelpResult({ help, onUse, onClose }: { help: AssistHelp; onUse: () => v
 }
 
 function CheckResult({ check }: { check: Precheck }) {
-  const conflicts = check.review_reasons.filter((r) => r.startsWith('Sanity: ')).map((r) => r.replace('Sanity: ', ''))
+  const conflicts = check.review_reasons.filter((r) => /^(Sanity|S-018): /.test(r)).map((r) => r.replace(/^(Sanity|S-018): /, ''))
   return (
     <section className={`panel verdict appear ${check.likely_decision}`} aria-live="polite" style={{ background: 'var(--ground)' }}>
       <p className="small"><strong>{check.notice}</strong></p>
