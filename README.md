@@ -187,7 +187,7 @@ curl -s localhost:8000/requests -H 'content-type: application/json' -d @data/tra
 | `make metrics` | R01–R10 against `expected.json`, 3 runs |
 | `make jury` | 49 new, messy and broken requests |
 | `make redteam` | 30 adversarial and paraphrased requests |
-| `make test` | 360+ tests, no GPU or API key needed (34 need the WHO file and skip without it) |
+| `make test` | 360+ tests, no GPU or API key needed (35 need the WHO file and skip without it) |
 | `curl -X POST localhost:8000/demo/reset` | Clean slate: R01–R10 back as proposals |
 
 Screens and the click-by-click walkthrough: [`frontend/README.md`](frontend/README.md).

@@ -1,6 +1,7 @@
+import pytest
 from fastapi.testclient import TestClient
 
-from hdab import register, spe, vocab
+from hdab import icd10, register, spe, vocab
 from hdab.api import app
 from hdab.data import load_requests
 from hdab.pipeline import decide
@@ -136,6 +137,7 @@ def test_cors_allows_the_vite_dev_server():
     assert r.headers.get("access-control-allow-origin") == "http://localhost:5173"
 
 
+@pytest.mark.skipif(not icd10.XML.exists(), reason="WHO ICD-10 file not installed")
 def test_applicant_is_not_told_what_the_data_holds():
     r = REQUESTS["R03"]
     draft = r.model_copy(update={  # I21: WHO knows it, the data does not
