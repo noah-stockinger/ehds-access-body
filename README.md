@@ -20,7 +20,7 @@
 - [What works and what does not](#what-works-and-what-does-not): the limits, stated plainly
 - [Find your way around](#find-your-way-around): specs, decisions, API, test reports
 
-> **Demo video:** ⏳ link added at submission
+> **Demo video:** [watch it on YouTube](https://youtu.be/ok64wViVaU4)
 
 ## Why this one
 
