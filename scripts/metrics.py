@@ -29,7 +29,8 @@ def main() -> int:
             start = time.perf_counter()
             answer = decide(r)
             seconds[r.id] = max(seconds[r.id], time.perf_counter() - start)
-            outputs[r.id].append(answer.model_dump_json())
+            # results only: a hosted model's confidence scores shift a little between runs (S-025)
+            outputs[r.id].append(answer.model_dump_json(include={"decision", "articles", "answer"}))
             last[r.id] = answer
 
     table = Table(title=f"R01–R10, {runs} runs")
