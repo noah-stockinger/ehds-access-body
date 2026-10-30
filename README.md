@@ -2,7 +2,7 @@
 
 ![Staff console: an officer opens a proposed rejection, filters the inbox, then confirms and releases a statistics request](docs/img/simple-staff-view.gif)
 
-**[▶ Try it out right now](https://spare-love-inclusive-postage.trycloudflare.com/apply)** (online until 22:00 Vienna time, 30 Oct) &nbsp;**or**&nbsp; **[Set it up yourself](#run-it-yourself)**
+**The hosted demo is closed: the hackathon is over and the page is offline.** &nbsp;**[Set it up yourself](#run-it-yourself)**
 
 ### Every EHDS data request decided in about two seconds. Every article cited. Every number safe. A human signs off every time.
 
@@ -182,7 +182,7 @@ Everything we run ourselves is open source. Our code is [MIT](LICENSE). The host
 
 ## Run it yourself
 
-You need [`uv`](https://docs.astral.sh/uv/) and Node. **For the best experience we highly recommend a TypeSafe key and an Anthropic key:** they power the purpose reader (Jev) and the writing help (Claude), exactly as in the live demo. If you prefer self-hosting, both can be replaced with open-source endpoints.
+You need [`uv`](https://docs.astral.sh/uv/) and Node. **For the best experience we highly recommend a TypeSafe key and an Anthropic key:** they power the purpose reader (Jev) and the writing help (Claude), exactly as in the hackathon demo. If you prefer self-hosting, both can be replaced with open-source endpoints.
 
 ```bash
 git clone --recursive https://github.com/noah-stockinger/ehds-access-body.git && cd ehds-access-body
