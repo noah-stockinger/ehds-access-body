@@ -10,7 +10,7 @@ from fastapi import FastAPI, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, model_validator
 
-from hdab import assist, definitions, pipeline, register, rstudio, spe, views
+from hdab import assist, definitions, pipeline, register, rstudio, sanity, spe, views, vocab
 from hdab.contracts import Answer, Applicant, Decision, Request
 from hdab.plan import parse
 
@@ -92,11 +92,13 @@ def submit(request: Request) -> Answer:
 def precheck(request: Request) -> dict:
     """S-048: the likely decision for a draft; no register entry, no SPE, no numbers."""
     a = pipeline.decide(request)
+    reasons = [r for r in a.review_reasons if not r.startswith(sanity.DATA)]  # nothing about the data before a decision
     return {"notice": "This is a pre-check, not the decision. Nothing has been submitted.",
             "likely_decision": a.decision, "articles": a.articles, "reason": a.reason,
-            "needs_review": a.needs_review, "review_reasons": a.review_reasons, "plan_text": a.plan_text,
-            "notes": [n for n in a.notes if n not in {w.message for w in a.definition_warnings}],
-            "definition_warnings": a.definition_warnings, "unclaimed_words": a.unclaimed_words,
+            "needs_review": bool(reasons), "review_reasons": reasons, "plan_text": a.plan_text,
+            "notes": [vocab.for_applicant(n) for n in a.notes if n not in {w.message for w in a.definition_warnings}],
+            "definition_warnings": [w.model_copy(update={"message": vocab.for_applicant(w.message)}) for w in a.definition_warnings],
+            "unclaimed_words": a.unclaimed_words,
             "unclaimed_parts": a.unclaimed_parts}
 
 

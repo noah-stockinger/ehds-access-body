@@ -120,6 +120,8 @@ REVIEW: dict[str, dict[str, str]] = {
               "check": "Compare the name and code. The numbers use the code as written, so a wrong code gives wrong numbers."},
     "S-051": {"why": "A cell differs from an earlier cell of the same applicant by fewer than 10 patients.",
               "check": "Subtracting the two could reveal a small group. Consider rejecting or coarsening this request."},
+    "Data": {"why": "The request asks for something the data does not hold. The applicant is not told this by the app.",
+             "check": "Decide whether telling the applicant is acceptable, then ask them to correct it or reject."},
     "Sanity": {"why": "The definitions contradict themselves or do not fit the data.",
                "check": "Read the message and the definitions. Ask the applicant to correct them."},
 }

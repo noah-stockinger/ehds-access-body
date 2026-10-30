@@ -79,8 +79,37 @@ def test_unreadable_draft_gets_one_repair_and_the_better_one_is_kept(on, monkeyp
 
 
 def test_a_worse_repair_does_not_replace_the_first_draft(on, monkeypatch):
-    mock(monkeypatch, draft(["COPD = any condition with an ICD-10 code starting with J44.", "gimme numbers"]), draft([]))
-    assert client.post("/form/assist", json=body()).json()["suggestion"]["definitions"][0].startswith("COPD")
+    mock(monkeypatch, draft(GOOD, question="How many patients have COPD or asthma per region?"), draft([]))
+    assert client.post("/form/assist", json=body()).json()["suggestion"]["definitions"] == GOOD
+
+
+def test_a_readable_draft_beats_an_unreadable_one_with_fewer_words_left_out(on, monkeypatch):
+    mock(monkeypatch, draft(GOOD, question="How many patients have COPD, asthma, gout or flu per region?"), draft(GOOD + ["gimme"]))
+    assert client.post("/form/assist", json=body()).json()["suggestion"]["definitions"] == GOOD
+
+
+@pytest.mark.parametrize("broken", [BAD, GOOD[:1]], ids=["unreadable", "no report line"])
+def test_a_draft_that_stays_broken_is_never_offered(on, monkeypatch, broken):
+    calls = mock(monkeypatch, draft(broken))
+    got = client.post("/form/assist", json=body(definitions=["my own line"])).json()
+    assert len(calls) == 2 and got["suggestion"] is None
+    assert got["check"]["unclaimed_parts"] == ["my own line"]  # the findings are about the applicant's text, not the hidden draft
+
+
+@pytest.mark.parametrize("messy", [[f"- {GOOD[0]}", f"- {GOOD[1]}"], [f"1. {GOOD[0]}", f"2) {GOOD[1]}"], ["\n".join(GOOD)],
+                                   [GOOD[0].replace("COPD", "**COPD**"), GOOD[1]]],
+                         ids=["bullets", "numbers", "line break inside an item", "bold"])
+def test_suggestion_fits_the_box_one_definition_per_line(on, monkeypatch, messy):
+    calls = mock(monkeypatch, draft(messy))
+    got = client.post("/form/assist", json=body()).json()
+    assert len(calls) == 1 and got["suggestion"]["definitions"] == GOOD
+    assert got["check"]["unclaimed_parts"] == []
+
+
+def test_the_repair_is_told_a_report_line_is_missing(on, monkeypatch):
+    calls = mock(monkeypatch, draft(GOOD[:1]), draft(GOOD))
+    assert client.post("/form/assist", json=body()).json()["suggestion"]["definitions"] == GOOD
+    assert "no report line" in calls[1]
 
 
 def test_left_out_names_dropped_conditions_and_changed_numbers():

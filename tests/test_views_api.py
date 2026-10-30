@@ -1,8 +1,9 @@
 from fastapi.testclient import TestClient
 
-from hdab import register, spe
+from hdab import register, spe, vocab
 from hdab.api import app
 from hdab.data import load_requests
+from hdab.pipeline import decide
 
 REQUESTS = {r.id: r for r in load_requests()}
 client = TestClient(app)
@@ -133,3 +134,24 @@ def test_s057_form_needs_plan_confirmation():
 def test_cors_allows_the_vite_dev_server():
     r = client.options("/staff/queue", headers={"Origin": "http://localhost:5173", "Access-Control-Request-Method": "GET"})
     assert r.headers.get("access-control-allow-origin") == "http://localhost:5173"
+
+
+def test_applicant_is_not_told_what_the_data_holds():
+    r = REQUESTS["R03"]
+    draft = r.model_copy(update={  # I21: WHO knows it, the data does not
+        "question": r.question.replace("atrial fibrillation", "acute myocardial infarction"),
+        "definitions": [d.replace("Atrial fibrillation", "Acute myocardial infarction").replace("atrial fibrillation", "acute myocardial infarction").replace("I48", "I21") for d in r.definitions]})
+    a = decide(draft)
+    assert any(x.startswith("Data:") and "occurs nowhere" in x for x in a.review_reasons)  # staff still see it
+    got = client.post("/precheck", json=draft.model_dump()).json()
+    assert not got["needs_review"] and not got["review_reasons"]
+    r03 = client.post("/precheck", json=r.model_dump()).json()
+    assert "I48.3" in r03["definition_warnings"][0]["message"] and "this data" not in str(r03)
+    assert "this data" in " ".join(decide(r).notes)  # S-070: the answer and the staff view keep it
+    post("R03")
+    assert "this data" not in str(client.get("/applicant/requests/R03").json()["notes"])
+
+
+def test_names_do_not_resolve_from_the_data():
+    assert vocab.lookup("metformin") == [] and vocab.lookup("unspecified") == []  # both words occur only in the data's columns
+    assert vocab.lookup("heart failure")[0].codes == ("I50",)

@@ -11,7 +11,7 @@ import re
 
 import anthropic
 import httpx
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel, ValidationError, field_validator
 
 from hdab.contracts import Request
 from hdab.plan import content_words
@@ -65,6 +65,14 @@ class Draft(BaseModel):
     definitions: list[str]
     model: str = ""  # who answered, if not `model()`: Anthropic can hand a refused request to another Claude model
 
+    @field_validator("definitions")
+    @classmethod
+    def _one_per_line(cls, v):
+        """The box holds one definition per line, so what the rules check here is what the form sends: no line breaks
+        inside an item, no list or bold markup."""
+        lines = [line for item in v for line in item.splitlines()]
+        return [x for x in (re.sub(r"^\s*(?:[-*•]|\d+[.)])\s+", "", line).replace("**", "").strip() for line in lines) if x]
+
 
 def enabled() -> bool:
     """Off by default like the decision model (S-052): rules-only mode sends nothing anywhere."""
@@ -115,9 +123,14 @@ def _chat(user: str) -> Draft:
     return _ollama(user) if provider() == "ollama" else _anthropic(user)
 
 
+def _syntax_problems(check: dict) -> list[str]:
+    """What the parser could not read (S-056) or what a statistical answer misses to be read at all, like the report line (S-046)."""
+    return [r for r in check["review_reasons"] if r.startswith(("S-056", "S-046"))]
+
+
 def _facts(check: dict) -> str:
     """Only what the rules said about the text; no numbers exist in a pre-check (S-048)."""
-    return json.dumps({"unreadable_words": check["unclaimed_words"], "notes": check["notes"],
+    return json.dumps({"unreadable_words": check["unclaimed_words"], "syntax_problems": _syntax_problems(check), "notes": check["notes"],
                        "warnings": [w.message for w in check["definition_warnings"]]}, ensure_ascii=False)
 
 
@@ -136,9 +149,13 @@ def left_out(request: Request, draft: Draft) -> list[str]:
     return sorted(numbers | words)
 
 
+def _broken(draft: Draft, check: dict) -> bool:
+    return not draft.definitions or not check["plan_text"] or bool(_syntax_problems(check))
+
+
 def _score(request: Request, draft: Draft, check: dict) -> int:
-    """How much is wrong; code warnings do not count, the applicant settles those."""
-    return len(check["unclaimed_words"]) + len(left_out(request, draft)) + (0 if draft.definitions and check["plan_text"] else 100)
+    """How much is wrong; code warnings do not count, the applicant settles those. A readable draft always beats a broken one."""
+    return len(check["unclaimed_words"]) + len(left_out(request, draft)) + (1000 if _broken(draft, check) else 0)
 
 
 def help(request: Request, precheck) -> dict:
@@ -157,7 +174,7 @@ def help(request: Request, precheck) -> dict:
         second = precheck(fixed)
         if _score(request, again, second) < _score(request, best, after):
             best, after = again, second
-    if not best.definitions:
-        return {"model": model(), "message": None, "suggestion": None, "left_out": [], "check": after}
+    if _broken(best, after):  # never fill the box with lines the rules cannot read; `check` is about the applicant's own text
+        return {"model": model(), "message": None, "suggestion": None, "left_out": [], "check": check}
     return {"model": best.model or model(), "message": best.message, "left_out": left_out(request, best),
             "suggestion": {"question": best.question, "definitions": best.definitions}, "check": after}

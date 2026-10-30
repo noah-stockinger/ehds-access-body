@@ -62,7 +62,7 @@ class TraceStep(BaseModel):
 
 
 class DefinitionWarning(BaseModel):
-    """A name and code that do not seem to agree (S-070). `wrong` also goes to review, `unsure` needs no confirmation."""
+    """A name and code that do not seem to agree (S-070). `wrong` and `unsure` also go to review, `unsure` needs no confirmation."""
 
     severity: Literal["wrong", "check", "unsure"]
     definition: str

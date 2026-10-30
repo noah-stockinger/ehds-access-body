@@ -43,7 +43,7 @@ def decide(request: Request) -> Answer:
     answer.plan_text, answer.unclaimed_words = plan.render(), plan.unclaimed_words
     answer.unclaimed_parts = [part for part, _ in plan.unclaimed]
     answer.notes = plan.notes + checked.notes + [w.message for w in checked.warnings if w.message not in plan.notes]
-    answer.review_reasons += problems + [f"S-070: {w.message}" for w in checked.warnings if w.severity == "wrong"]
+    answer.review_reasons += problems + [f"S-070: {w.message}" for w in checked.warnings if w.severity in ("wrong", "unsure")]
     answer.needs_review = bool(answer.review_reasons)
     if not problems:  # S-046, S-056: nothing understood only in part gets numbers
         answer.answer = stats.execute(plan, spe=answer.decision == "APPROVE_SPE")

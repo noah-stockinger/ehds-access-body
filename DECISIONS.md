@@ -101,7 +101,7 @@ Status: `open` (not discussed yet) · `kept` (team agrees, spec change pending o
 - **Milestone:** M-27
 - **Specs:** S-070 ("a curated table"), S-052, S-054 (S-084 and S-085 allow the hosted model)
 - **Conflict:** S-070 names a curated table with an advisory note only. A table cannot cover every code, and a word match cannot judge meaning: on 66 test pairs the firm rules flagged 8/30 wrong codes
-- **Chosen:** rules against the WHO ICD-10 file always run; with a model enabled it answers `match`, `broader` or `different` from WHO's wording (Jev: 29/30 wrong codes and 6/6 too-broad warned, 2/30 correct definitions warned, 66 hand-labelled pairs, not held out). A `wrong` warning is also a review reason; the numbers still use the exact code (S-007) and the applicant can send anyway
+- **Chosen:** rules against the WHO ICD-10 file always run; with a model enabled it answers `match`, `broader` or `different` from WHO's wording (Jev: 29/30 wrong codes and 6/6 too-broad warned, 2/30 correct definitions warned, 66 hand-labelled pairs, not held out). A `wrong` or `unsure` warning is also a review reason, so a wrong code the rules cannot name still reaches an officer (cost: correct synonyms such as "Heart attack = I21" go to review in rules-only mode); the numbers still use the exact code (S-007) and the applicant can send anyway
 - **Alternatives:** rules only (most wrong codes get just a soft note); Kev-4B (missed R03: 2/6 too-broad)
 - **Known costs:** definitions and WHO wording go to TypeSafe in Jev modes; WHO holds the ICD-10 copyright and redistribution needs its permission, so the file is not in this repo and was removed from the branch history (README, "WHO ICD-10 file"); without it the app says ICD-10 codes were not checked
 - **To discuss:** update S-070's wording on `master`; ask licensing@who.int whether the file may ship with the repo
@@ -125,3 +125,12 @@ Status: `open` (not discussed yet) · `kept` (team agrees, spec change pending o
 - **Alternatives:** describe it as a next step only; a locked-down remote desktop
 - **Known costs:** the browser must receive what it shows, so the screen, the clipboard and the browser's own traffic stay open and a determined user can still copy rows out; RStudio's `allow-file-downloads=0` does not close its `/files` and `/export` routes, the proxy does, and the Export menu entry stays visible but fails; what happens inside a session is not logged; one session at a time on one port; with no login, anyone who can reach the port (on the tailnet demo, every device on the tailnet) gets the session without the check or the log entry of S-040; the SPE file now uses the older storage format `v1.4.0` so the R driver can read it, and the image's driver version must keep up with it (test in `tests/test_rstudio.py`)
 - **To discuss:** real logins and session auditing before any use beyond the demo
+
+### D-12 · Applicants are not told what the data holds · open
+- **Milestone:** none, found in the demo
+- **Specs:** S-070, S-071, S-048
+- **Conflict:** the pre-check told applicants which codes and years occur in the data and whether a population is empty, so drafts could be used to probe the data without a decision
+- **Chosen:** findings that depend on the data are review reasons starting with `Data:`, for staff only, and do not change the pre-check's `needs_review`; the mismatch note keeps its data sentence in the answer and staff view (S-070) but not in the applicant's pre-check or view; a code is judged against WHO alone; names resolve from the hand-built table only, not from the data's columns
+- **Alternatives:** publish a data catalogue so applicants may know this openly
+- **Known costs:** an applicant whose code is absent from the data learns this only from staff; a name outside the hand-built table ("metformin") needs a code, otherwise it is unread and goes to review with no numbers
+- **To discuss:** `POST /requests` returns the full answer unfiltered, including numbers before staff confirm

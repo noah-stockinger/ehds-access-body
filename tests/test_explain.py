@@ -34,7 +34,7 @@ def test_every_review_reason_and_signal_is_explained():
 
 
 @pytest.mark.parametrize("reason", [
-    "D-08: x", "S-054: x", "S-034: x", "S-072: x", "S-064: x", "S-061: x", "S-070: x", "S-051: x", "Sanity: x", "S-018: x", "S-049: x"])
+    "D-08: x", "S-054: x", "S-034: x", "S-072: x", "S-064: x", "S-061: x", "S-070: x", "S-051: x", "Sanity: x", "Data: x", "S-018: x", "S-049: x"])
 def test_reasons_the_cases_may_not_reach_are_explained_too(reason):
     assert explain.review(reason)
 

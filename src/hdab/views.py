@@ -3,7 +3,7 @@
 import csv
 import io
 
-from hdab import explain
+from hdab import explain, vocab
 from hdab.plan import parse
 from hdab.spe import DUTIES, SPE_DUTIES
 
@@ -42,7 +42,7 @@ def applicant(entry: dict) -> dict:
         "reason": a.reason,
         "steps": [f"{s.rule}: {'yes' if s.matched else 'no'}" for s in a.trace if not s.rule.startswith("text addressing")],
         "plan_text": a.plan_text,
-        "notes": a.notes,
+        "notes": [vocab.for_applicant(n) for n in a.notes],
         "mode": a.mode,
         "ai_note": ai_note(a.mode),
         "answer": a.answer if released(entry) else None,

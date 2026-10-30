@@ -1,7 +1,7 @@
 """Plain-English names → code prefixes (S-007, S-058) and code/name mismatch notes (S-070).
 
-A hand-built table (S-053) first, then the data's own `description` / `name` columns. A name with more than one
-fitting concept is ambiguous and never resolved silently.
+A hand-built table only (S-053): resolving names from the data's own columns would tell applicants what the data holds.
+A name with more than one fitting concept is ambiguous and never resolved silently.
 """
 
 import re
@@ -67,23 +67,7 @@ def _singular(name: str) -> str:
 def lookup(name: str) -> list[Concept]:
     """Candidate concepts for a plain-English name; empty if unknown, more than one if ambiguous."""
     name = " ".join(name.lower().split())
-    for key in (name, _singular(name)):
-        if key in CURATED:
-            return CURATED[key]
-    words = re.findall(r"[\w-]+", _singular(name))
-    if not words:
-        return []
-    t = load_tables()
-    found: dict[tuple, Concept] = {}
-    for kind, table, code_col, text_col in [("condition", "conditions", "icd10", "description"),
-                                            ("medication", "medications", "atc", "name"),
-                                            ("observation", "observations", "loinc", "name")]:
-        pairs = t[table][[code_col, text_col]].drop_duplicates()
-        for code, text in pairs.itertuples(index=False):
-            if all(re.search(rf"\b{re.escape(w)}", text, re.IGNORECASE) for w in words):
-                key = code.split(".")[0] if kind == "condition" else code  # ICD-10: 3-character category
-                found[(kind, key)] = Concept(kind, (key,), text)
-    return list(found.values())
+    return CURATED.get(name) or CURATED.get(_singular(name)) or []
 
 
 def usual_code(name: str, kind: Kind, codes: tuple[str, ...]) -> str | None:
@@ -94,6 +78,11 @@ def usual_code(name: str, kind: Kind, codes: tuple[str, ...]) -> str | None:
     if not usual or any(p.startswith(u) or u.startswith(p) for p in codes for u in usual):
         return None
     return " or ".join(usual)
+
+
+def for_applicant(note: str) -> str:
+    """The mismatch note without what it says about the data, which only staff may see."""
+    return re.sub(r" (?:In this data these codes occur: .*?\.|None of these codes occur in this data\.)(?= |$)", "", note)
 
 
 def mismatch_note(name: str, prefixes: tuple[str, ...]) -> str | None:

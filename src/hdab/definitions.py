@@ -6,7 +6,6 @@ from dataclasses import dataclass, field
 
 from hdab import icd10, kev, vocab
 from hdab.contracts import DefinitionWarning
-from hdab.data import load_tables
 from hdab.plan import Plan
 
 
@@ -17,15 +16,11 @@ class Checked:
     asked: list[dict] = field(default_factory=list)  # the model's answers, for the register (S-038)
 
 
-def _exists(code: str) -> bool:
-    return icd10.exists(code) or bool(load_tables()["conditions"]["icd10"].str.startswith(code).any())
-
-
 def _condition(name: str, codes: tuple[str, ...], relation: str | None) -> tuple[str, str] | None:
     """The table of the design: (severity, message) from what the rules found and what the model said; None if fine."""
     shown = " or ".join(codes)
-    if missing := [c for c in codes if not _exists(c)]:
-        return "wrong", f'"{name}": {", ".join(missing)} is not a WHO ICD-10 code and does not occur in this data.'
+    if missing := [c for c in codes if not icd10.exists(c)]:
+        return "wrong", f'"{name}": {", ".join(missing)} is not a WHO ICD-10 code.'
     if relation == "different":
         return "wrong", f'"{name}": {shown} looks like a different condition. WHO: {_titles(codes)}'
     wording = " ".join(icd10.text(c) for c in codes)
@@ -65,7 +60,7 @@ def check(plan: Plan) -> Checked:
                 found = "wrong", f'"{t.name}": {" or ".join(t.codes)} looks wrong. The usual code is {usual}.'
         elif icd10.categories():
             relation = None
-            if use_model and all(_exists(c) for c in t.codes):
+            if use_model and all(icd10.exists(c) for c in t.codes):
                 try:
                     who_text = "\n".join(icd10.describe(c) for c in t.codes)
                     answer, version = kev.relation(t.name, t.codes, who_text)

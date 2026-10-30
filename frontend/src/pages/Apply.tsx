@@ -22,18 +22,19 @@ function sentStatus(q: ApplicationItem) {
   return q.decision === 'REJECT' ? 'Rejected' : 'Approved'
 }
 
-// Demo prefill from the agreed screen design (an R01-like statistics request).
+// Demo prefill: request R03.
 const START = {
-  name: 'Dr. Sophie Lechner',
-  organisation: 'Danube Institute for Diabetes Research',
+  name: 'Mag. Petra Wimmer',
+  organisation: 'Federal Ministry of Health, department for quality in healthcare',
   country: 'AT',
-  purpose: 'We study regional differences in type 2 diabetes to plan a prevention programme with the regional health authorities.',
-  question: 'How many adults have type 2 diabetes in each region and what is the prevalence?',
+  purpose: 'Guidelines recommend oral anticoagulation for most older patients with atrial fibrillation. We want to know how large the treatment gap is to plan a quality programme.',
+  question: 'Among patients with atrial fibrillation aged 65 and over, how many have no active oral anticoagulant, by age band?',
   definitions: [
-    'Adult = aged 18 or older on 31 December 2025.',
-    'Type 2 diabetes = any condition with an ICD-10 code starting with E11.',
-    'Prevalence = adults with type 2 diabetes / all adults in the region × 100, one decimal.',
-    'Report per region: adults, adults with type 2 diabetes and the prevalence.',
+    'Atrial fibrillation = any condition with an ICD-10 code starting with I48.',
+    'Age bands on 31 December 2025: 65-74, 75-84, 85+.',
+    'Oral anticoagulant = ATC code starting with B01AA or B01AF.',
+    'A medication is active on 31 December 2025 if start_date is on or before that day and end_date is empty or on or after that day.',
+    'Report per band: patients with atrial fibrillation, how many of them have no active oral anticoagulant and that share in %, one decimal.',
   ].join('\n'),
   why: '',
 }
@@ -105,6 +106,7 @@ export default function Apply() {
     await api.submitJson(uploaded!.request)
     navigate(`/applicant/${uploaded!.request.id}`)
   })
+  const unread = check?.unclaimed_parts ?? []
   const warned = check?.definition_warnings.some(mustConfirm) ?? false
   const downgraded = access && check?.likely_decision === 'APPROVE_STATISTICAL'
 
@@ -143,8 +145,14 @@ export default function Apply() {
             <label className="field">Purpose<textarea required rows={3} value={f.purpose} onChange={edit('purpose')} /></label>
             <label className="field">Question<input required value={f.question} onChange={edit('question')} /></label>
             <label className="field">Definitions, one per line, in plain English
-              <textarea required className="code" rows={5} value={f.definitions} onChange={edit('definitions')} />
+              <textarea required className="code" rows={5} value={f.definitions} onChange={edit('definitions')} aria-invalid={unread.length > 0} />
               <span className="hint">Write "Term = meaning". End with a "Report per …" line.</span>
+              {unread.length > 0 && (
+                <span className="field-error" role="alert">
+                  Can't read: {unread.map((u) => u.replace(/\.$/, '')).join(' / ')}. Rephrase it, or no numbers are computed until an officer has looked at it.
+                  {unread.some((u) => /\b(19|20)\d{2}\b|start_date|onset_date|\byears?\b/i.test(u)) && ' Diagnoses cannot be limited to a date range yet.'}
+                </span>
+              )}
             </label>
             {access && (
               <label className="field">Why are anonymised statistics not enough? (Art. 67(2)(e))
@@ -283,8 +291,7 @@ function HelpResult({ help, onUse, onClose }: { help: AssistHelp; onUse: () => v
 }
 
 function CheckResult({ check }: { check: Precheck }) {
-  const unread = check.unclaimed_parts ?? []
-  const notInData = check.review_reasons.filter((r) => r.startsWith('Sanity: ')).map((r) => r.replace('Sanity: ', ''))
+  const conflicts = check.review_reasons.filter((r) => r.startsWith('Sanity: ')).map((r) => r.replace('Sanity: ', ''))
   return (
     <section className={`panel verdict appear ${check.likely_decision}`} aria-live="polite" style={{ background: 'var(--ground)' }}>
       <p className="small"><strong>{check.notice}</strong></p>
@@ -302,20 +309,10 @@ function CheckResult({ check }: { check: Precheck }) {
         </div>
       )}
       <Warnings warnings={check.definition_warnings} />
-      {notInData.length > 0 && (
+      {conflicts.length > 0 && (
         <div className="callout warn">
           <h3>This will not work as written</h3>
-          <ul className="bullets small">{notInData.map((n) => <li key={n}>{n}</li>)}</ul>
-        </div>
-      )}
-      {unread.length > 0 && (
-        <div className="callout danger">
-          <h3>What we could not read</h3>
-          <ul className="bullets small">{unread.map((u) => <li key={u}>{u}</li>)}</ul>
-          {unread.some((u) => /\b(19|20)\d{2}\b|start_date|onset_date|\byears?\b/i.test(u)) && (
-            <p className="small">Diagnoses cannot be limited to a date range yet: every diagnosis counts, whatever its date.</p>
-          )}
-          <p className="small">As written, no numbers would be computed and an officer would have to look at it first. Rephrase these parts, then check again.</p>
+          <ul className="bullets small">{conflicts.map((n) => <li key={n}>{n}</li>)}</ul>
         </div>
       )}
       {check.notes.length > 0 && <ul className="bullets small muted">{check.notes.map((n) => <li key={n}>{n}</li>)}</ul>}

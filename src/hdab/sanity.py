@@ -2,8 +2,9 @@
 (tests/jury `error` cases): contradictory ranges, codes or years the data does not have, empty populations, a format
 that contradicts the request type, a question about something no definition covers.
 
-Each finding is a review reason starting with "Sanity:"; the pipeline then withholds the numbers (S-046, S-071).
-Only aggregate counts are computed here; nothing leaves the app.
+Each finding is a review reason; the pipeline then withholds the numbers (S-046, S-071). "Sanity:" findings follow from
+the request alone. "Data:" findings say what the data holds, so only staff may see them: an applicant could otherwise
+probe the data with drafts.
 """
 
 import re
@@ -15,6 +16,7 @@ from hdab.data import load_tables
 from hdab.plan import Plan, PSet
 from hdab.stats import Engine
 
+DATA = "Data: "
 TABLE = {"condition": ("conditions", "icd10"), "medication": ("medications", "atc"), "observation": ("observations", "loinc")}
 
 
@@ -111,7 +113,8 @@ def _question(request: Request, plan: Plan) -> list[str]:
 
 
 def check(request: Request, plan: Plan, spe: bool) -> list[str]:
-    found = _format(request) + _ranges(plan) + _codes(plan) + _question(request, plan)
+    found = _format(request) + _ranges(plan) + _question(request, plan)
+    data = _codes(plan)
     if not plan.problems:  # only a fully understood plan can be evaluated
-        found += _empty(plan, spe)
-    return [f"Sanity: {f}" for f in found]
+        data += _empty(plan, spe)
+    return [f"Sanity: {f}" for f in found] + [f"{DATA}{f}" for f in data]

@@ -46,9 +46,9 @@ Demo walk (all with R01–R10 from `data/track3/requests/`):
   A step whose rule starts with `"1b decision model"` means the model changed the outcome: `matched: true` = it rejected
   what the keywords missed; `matched: false` = it overruled a keyword rejection (decision is an approval) or was itself
   overruled because of an injection (decision stays `REJECT`). The staff screen shows it as a callout.
-- `review_reasons`: why staff must look (flag shown in the queue as `needs_review`); never shown to applicants.
+- `review_reasons`: why staff must look (flag shown in the queue as `needs_review`); not in the applicant view. `POST /precheck` returns them without the `Data:` ones and counts only the rest for its `needs_review`, so a draft cannot be used to probe what the data holds; for the same reason its notes and warnings leave out whether codes occur in the data.
 - `signals`: staff-only hints (e.g. "Organisation looks like: insurer"); change nothing.
-- `definition_warnings`: `[{severity, definition, message}]`, a name and code that do not seem to agree (S-070, `src/hdab/definitions.py`): `wrong` (also a review reason), `check`, or `unsure` (needs no confirmation). The numbers still use the exact code. `POST /requests` is not gated; its answer carries them.
+- `definition_warnings`: `[{severity, definition, message}]`, a name and code that do not seem to agree (S-070, `src/hdab/definitions.py`): `wrong` (also a review reason), `check`, or `unsure` (also a review reason, needs no confirmation). The numbers still use the exact code. `POST /requests` is not gated; its answer carries them.
 - `plan_text`: the query plan in plain English (show next to the original `definitions`); `notes`: inferred codes and
   definition mismatches (R03's I48 note); `unclaimed_words`: words the parser did not understand (highlight them).
 - `kev`: staff only, empty in rules-only mode; one entry per model question:

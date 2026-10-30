@@ -172,4 +172,14 @@ def test_only_the_sentences_that_failed_are_marked_not_every_use_of_their_words(
     assert window in a.unclaimed_parts and adult not in a.unclaimed_parts and chd not in a.unclaimed_parts
     assert "december" in a.unclaimed_words  # why highlighting by single words marked the correct first line
     assert a.answer is None and a.needs_review  # S-046: no numbers, never a guess at the date window
-    assert any(r.startswith("Sanity:") and "occurs nowhere" in r for r in a.review_reasons)  # the data has no I20-I25
+    assert any(r.startswith("Data:") and "occurs nowhere" in r for r in a.review_reasons)  # the data has no I20-I25
+
+
+def test_unsure_warning_goes_to_review_but_changes_no_decision(monkeypatch):
+    monkeypatch.setenv("KEV_MODE", "off")
+    r03 = next(r for r in load_requests() if r.id == "R03")
+    a = decide(r03.model_copy(update={"definitions": [icd("Gout", "E11"), *r03.definitions[1:]],
+                                      "question": r03.question.replace("atrial fibrillation", "gout")}))
+    assert [w.severity for w in a.definition_warnings] == ["unsure"]
+    assert a.decision == "APPROVE_STATISTICAL" and a.needs_review
+    assert any(r.startswith('S-070: "Gout"') for r in a.review_reasons)

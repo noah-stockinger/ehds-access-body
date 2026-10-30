@@ -1,209 +1,217 @@
-# EHDS Health Data Access Body
+# Health Data Access Body
 
-A prototype of a Health Data Access Body under the European Health Data Space (Reg. (EU) 2025/327, Chapter IV), built for
-the AIM Healthcare Hackathon Vienna 2026, Track 3. It takes a data request, proposes `REJECT`, `APPROVE_STATISTICAL` or
-`APPROVE_SPE` with the cited articles, computes small-cell-safe statistics or fills a secure processing environment, and
-shows decision and reason to the applicant and the staff. Staff confirm or override every proposal.
+### Every EHDS data request decided in about two seconds. Every article cited. Every number safe. A human signs off every time.
 
-Challenge: [`data/track3/README.md`](data/track3/README.md). Hard rules: [`SPECS.md`](SPECS.md). Trade-offs taken:
-[`DECISIONS.md`](DECISIONS.md). Build log: [`MILESTONES.md`](MILESTONES.md).
+**AIM Healthcare Hackathon Vienna 2026 · Track 3: European Health Data Space**
 
-> **Demo only, synthetic data only.** There are no logins: anyone who can reach the app can confirm or override decisions,
-> read every application and open the secure environment (`DECISIONS.md` D-10, D-11). What a browser shows in RStudio can
-> be copied out by hand. It has had no conformity assessment under the EU AI Act and holds no certification. Run it on
-> localhost or a private network, and add real authentication before any other use.
+**10/10** correct decisions · **6/6** correct numbers · **0** privacy leaks · **10/10** consistent over 3 runs · **2.07 s** slowest answer (target: 60 s)
 
-## Repo layout
-| Path | Contents |
-|---|---|
-| `data/track3/` | Official challenge: `README.md` (git submodule), 5 CSVs in `data/` (20,000 synthetic patients), 10 requests + `expected.json` in `requests/` |
-| `src/hdab/contracts.py` | Pydantic shapes of a request and an answer |
-| `src/hdab/data.py` | Data paths (`$TRACK3_DATA`, `$HDAB_VAR`) and loaders |
-| `src/hdab/pipeline.py` | The single entry point: `decide` (pure) and `submit` / `confirm` / `override` (register, SPE) |
-| `src/hdab/rules.py` | Deterministic decision rules: Art. 54 lexicon, request type, SPE justification, reasons, trace |
-| `src/hdab/plan.py`, `vocab.py` | Definitions → query plan; plain-English names → ICD-10 / ATC / LOINC; mismatch notes |
-| `src/hdab/stats.py` | Query plan → small-cell-safe statistics or the exact SPE cohort |
-| `src/hdab/spe.py` | Secure processing environment: one DuckDB file per permit, data permit, blocked downloads |
-| `src/hdab/register.py`, `views.py` | Register and audit log (SQLite); what applicant and staff see |
-| `src/hdab/sql.py` | The query plan as SQL for the audit log, checked against the computed numbers |
-| `src/hdab/explain.py` | What each rule is, why something was flagged, what staff should check |
-| `src/hdab/rstudio.py` | RStudio in the secure environment: a container with no network, data read-only |
-| `src/hdab/definitions.py`, `icd10.py`, `sanity.py` | Do codes fit their names (WHO ICD-10), do definitions fit the data |
-| `src/hdab/assist.py` | Optional writing help on the applicant form |
-| `src/hdab/kev.py` | Optional decision model: hosted Jev or local Kev-4B (off by default) |
-| `src/hdab/api.py` | FastAPI app; endpoints in [`docs/API.md`](docs/API.md) |
-| `frontend/` | React screens for applicant, staff and secure environment: [`frontend/README.md`](frontend/README.md) |
-| `docker/` | Images for RStudio and its proxy (`make spe-image`), and the tailnet demo's web server |
-| `scripts/` | `metrics.py`, `redteam.py`, `compare_modes.py`, smoke tests, `kev.sh`, `demo.sh` |
-| `tests/` | pytest; `tests/redteam/cases.json` = own red-team and paraphrase requests |
+![Staff console: R02 proposed for rejection under Art. 54(1)(b), with the reason, the mode and the officer's decision buttons](docs/img/staff-reject.png)
 
-## Setup (Linux/macOS; Windows below)
-Needs: `uv`. Optional: Docker (HAPI FHIR), `jq` + `curl` (smoke tests), Ollama.
-```bash
-git clone --recursive https://github.com/noah-stockinger/ehds-access-body.git  # pulls data/track3 submodule
-git submodule update --init      # already cloned without --recursive? run this instead
-uv sync                          # venv
-cp .env.example .env             # service locations (all optional)
-```
+> **Demo video:** ⏳ link added at submission · **Metrics:** [results on the 10 requests](#metric-results) · **Run it:** [four commands](#run-it-yourself)
 
-### Windows: clone and pull with the submodule
-`data/track3` is a git submodule (the official challenge repo). Use **Git for Windows** in PowerShell or Git Bash:
-```powershell
-git clone --recurse-submodules https://github.com/noah-stockinger/ehds-access-body.git
-cd ehds-access-body
-git config submodule.recurse true          # once per clone: every `git pull` / `git checkout` also updates data/track3
-```
-Pulling later:
-```powershell
-git pull                                   # with submodule.recurse=true, this is enough
-git submodule update --init --recursive    # without it, or if data/track3 is empty
-```
-- **Cloned before the submodule switched to HTTPS?** Run `git submodule sync` once, then `git submodule update --init --recursive`.
-- **Check it worked:** `git submodule status` shows a commit hash without a leading `-`, and `data/track3/requests/` holds `R01.json`–`R10.json`.
-- **Line endings:** keep Git for Windows' default (`core.autocrlf=true`); the CSVs and JSON parse fine either way.
-- **Encoding:** read the data as UTF-8 (region names like `Kärnten`). `hdab.data` already does; in your own code pass
-  `encoding="utf-8"` to `open()` / `read_text()` / `pd.read_csv()`, or set `PYTHONUTF8=1`.
-- `make` and the bash smoke script need Git Bash or WSL; the `uv run ...` commands behind each target work in PowerShell too.
+## Why this one
 
-## Run
-```bash
-make test                    # pytest
-make dev KEV_MODE=off        # rules only, no API keys or model needed; API on :8000, docs at /docs, endpoints in docs/API.md
-make dev                     # Jev-led demo mode: needs TYPESAFE_API_KEY in .env (D-08)
-make metrics                 # R01–R10 against expected.json, 3 runs (S-029)
-make redteam                 # own red-team and paraphrase cases (S-060)
-make jury                    # jury simulation: new, messy and broken requests (docs/findings/jury-simulation.md)
-make compare                 # Kev off vs. Kev-assisted (S-069; needs Kev)
-make smoke                   # which tools are ready on this machine
-make spe-image               # build the RStudio images (Docker); needed for "Open RStudio"
-```
-Frontend (Vite, :5173): `make seed` (`make seed KEV_MODE=off` without a key), then `cd frontend && npm install && npm run dev`; screens, demo walkthrough and Mac tunnel in [`frontend/README.md`](frontend/README.md).
-Try one request: `curl -s localhost:8000/requests -H 'content-type: application/json' -d @data/track3/requests/R01.json`.
-Clean slate for the demo: `curl -X POST localhost:8000/demo/reset` puts R01–R10 back as proposals and deletes everything else: submitted applications, staff decisions, SPEs and the audit log. It takes as long as `make seed` and needs no restart.
-Runtime state (register, SPE files) goes to `var/` (gitignored, `$HDAB_VAR`).
+Most LLM demos ask you to trust the model. We built an access body that cannot be talked into a bad approval:
+
+- **Fixed rules decide. Models only read.** The challenge's decision order is code, not a prompt. A model can reject what the keyword rules miss or send a case to a human. **It can never approve on its own.**
+- **Doubt goes to a human, never to approval.** Anything the app cannot fully read goes to `needs_review` and gets no numbers. It does not guess.
+- **We attacked it before you could.** 113 extra adversarial, messy and unseen requests. For the jury simulation and both holdouts, the expected outcomes were written down *before* the first run, and the jury simulation's numbers are checked against a separate oracle that shares no code with the app.
+- **Every number proves itself.** Each statistic is computed in pandas, re-run as generated SQL, and compared. The staff log shows the query and says whether it gives the same numbers.
+- **The download block is real.** The API refuses, the RStudio container has no network, the data is read-only, and a proxy closes RStudio's download routes. The attempts shown below all failed.
+- **No lock-in.** Flagship models for the demo, open models one setting away, and no model at all if you prefer. See [Models](#models-flagship-today-your-own-hardware-tomorrow).
+
+## What the jury can try
+
+### Rejected, with the law and the words that triggered it
+Above: R02, an insurer's pricing department, stopped at Art. 54(1)(b), with the trigger word `premiums` quoted. No data is released, and the applicant reads the same reason in plain language.
+
+### Numbers an applicant can trust, released only after an officer confirms
+
+<img src="docs/img/applicant-numbers.png" alt="R01 answer: approved as anonymised statistics under Art. 53 and 69, with 9 regions, adults, adults with type 2 diabetes and prevalence" width="760">
+
+### A real secure processing environment, and a download that fails
+
+R05 gets a permit and a DuckDB workspace holding exactly the **1,152** selected patients (1,207 if opt-outs were wrongly included) and only the requested record types. The proof panel is computed from the workspace file, and shows **0** opted-out IDs inside. The refusal lands in the audit log.
+
+![Secure workspace for R05: cohort of 1,152, zero opted-out IDs, download blocked under Art. 73 and logged, and the data permit](docs/img/spe-blocked.png)
+
+And it is not a mock-up. Researchers get a live RStudio session. In this one, R reads the cohort, `download.file` cannot reach the internet, and `DELETE` hits a read-only database:
+
+![RStudio inside the SPE: the patient count returns 1152, download.file fails to resolve the host, DELETE fails on a read-only database](docs/img/rstudio.png)
+
+### A brand-new request, on the two features none of the 10 use
+
+The challenge warns that the jury can filter by main diagnosis (`primary_icd10`) and group by hospital (`data_holder`). Nothing is written per request: this one went through the form and came back answered.
+
+<img src="docs/img/jury-hospital.png" alt="New request: 2025 heart failure stays as main diagnosis per hospital. Klinikum Nord 66, Süd 60, West 31" width="760">
+
+### Applicants see how the app reads them, before they send
+
+The pre-check restates each definition in plain English, and the applicant must confirm that reading. An access application that does not say why statistics are not enough is refused here.
+
+<img src="docs/img/precheck.png" alt="Pre-check: likely approved as statistics under Art. 53 and 69, followed by the plain-English reading of each definition" width="760">
+
+Stuck? **Help me write this** drafts the question and definitions. The rules re-check every draft, the applicant must accept it, and the app warns when words go missing. Here it noticed "main diagnosis" had been dropped:
+
+<img src="docs/img/writing-help.png" alt="AI suggestion labelled as such, with a warning that the suggested definitions do not mention 'diagnosis, main'" width="760">
+
+### An audit trail staff can open line by line
+
+Every rule step and every model answer is its own entry, with its evidence or the model's instructions, input and probabilities. Numbers stay out of the log.
+
+![Audit log: rule steps, Jev's answers with probabilities, and the SQL behind the numbers marked 'gives the same numbers'](docs/img/audit-sql.png)
+
+## Metric results
+
+Measured on 30 Oct 2026 with [`scripts/metrics.py`](scripts/metrics.py) on the `expected.json` of the 10 requests, 3 runs each.
+
+| Metric | Target | **Jev-led (demo)** | Rules only (no model) |
+|---|---|---|---|
+| Correct decisions | 10 of 10 | **10 of 10** | **10 of 10** |
+| Correct numbers | 6 of 6 | **6 of 6** | **6 of 6** |
+| Privacy leaks | 0 | **0** | **0** |
+| Consistency | 10 of 10 | **10 of 10** | **10 of 10** |
+| Slowest answer | under 60 s | **2.07 s** | **0.42 s** |
+
+Reproduce: `make metrics` (rules only), or `KEV_MODE=led KEV_PROVIDER=jev make metrics` with `TYPESAFE_API_KEY` exported in your shell. `scripts/metrics.py` does not read `.env`; without the key the run falls back to rules and is not a Jev-led measurement.
+
+### Beyond the 10
+
+| Test | Requests | Rules only | Jev-led |
+|---|---|---|---|
+| Jury simulation (`make jury`): new, messy, broken | 49 | **49/49**, numbers match the independent oracle | not run |
+| Red team (`make redteam`), tuned on | 30 | **30/30**, 0 silent | 27/30, 0 silent |
+| Holdout 1, rules tuned afterwards | 17 | 15/17, 0 silent | 15/17, 0 silent |
+| **Holdout 2, unseen** | 17 | 8/17, **2 silent** | **15/17, 0 silent** |
+| `make test` | 360+ tests | all pass | models mocked |
+
+"Silent" means a wrong approval with no review flag, the one failure an access body cannot undo. **Holdout 2 is why the demo runs with a model:** on unseen wording, keyword rules let two bad requests through and the model-assisted mode let none through. All 7 Jev-led misses are on the cautious side: 5 harmless requests went to a human instead of being approved, and 2 went to rejection instead of review. Results shift slightly between runs (holdout 2 scored 16/17 on an earlier run), because the hosted model can change.
 
 ## Architecture
-Rules decide, Kev (optional) double-checks, staff have the last word. Anything not understood is flagged
-`needs_review` and gets no numbers; the app never guesses.
+
+We built the decision pipeline, the query planner, the statistics engine, the SPE, the register and the web app. The rest is open-source infrastructure and two optional models.
+
+```mermaid
+flowchart TD
+    A[Request JSON or guided form] --> R[rules.py<br/>fixed decision order, Art. 54 lexicon]
+    M[Jev or Kev<br/>request text only] -. typed answers: can reject or flag, never approve .-> R
+    W[Claude or Qwen<br/>writing help] -. draft, re-checked by the rules .-> A
+    R --> P[plan.py + vocab.py + definitions.py<br/>plain English to ICD-10, ATC, LOINC]
+    R -->|REJECT Art. 54| V
+    P --> S[stats.py + sql.py<br/>opt-outs out first, small-cell rule, SQL cross-check]
+    P --> E[spe.py + rstudio.py<br/>one DuckDB per permit, no network, read-only]
+    D[(5 CSVs<br/>20,000 synthetic patients)] --> S
+    D --> E
+    S --> G[register.py<br/>SQLite register and audit log]
+    E --> G
+    G --> O[Staff: confirm or override]
+    O --> V[views.py + React<br/>applicant, staff, SPE]
 ```
-request JSON ──▶ POST /requests  or  guided form (/form/precheck → /form/submit)
-  │
-  ├─ rules.py   1 prohibited purpose? (Art. 54 lexicon over purpose, question, definitions; negation/quotes → review)
-  │             2 health data request → statistics (Art. 53, 69)
-  │             3 access application that says why statistics are not enough → SPE (Art. 53, 66, 68, 73)
-  │             4 other access application → statistics (Art. 53, 66, 69)          ⇒ decision, articles, reason, trace
-  ├─ plan.py    definitions → query plan (terms, code prefixes, bands, groups, measures); every word must be claimed,
-  │             else needs_review; plain-English rendering for applicant and staff; vocab.py maps names to codes
-  ├─ stats.py   pandas over the CSVs: opt-outs out first, <10 / suppressed, one decimal halves up, all groups shown
-  ├─ spe.py     APPROVE_SPE: cohort + requested record types → var/spe/<id>.duckdb, data permit, download always 403
-  ├─ kev.py     only with KEV_ENABLED=true: typed questions K1–K5 to local Kev-4B; disagreement or low confidence → review
-  └─ register   SQLite register + audit log; numbers and SPE released to the applicant only after staff confirm
-```
-Models and services: the only outbound calls go to the enabled models, hosted Jev or local Kev-4B
-(`POST $KEV_BASE_URL/v1/systemone`) and the writing help (hosted Claude, or `$ASSIST_URL` with Ollama), with request text only (S-022, S-084, S-087). Data: the 5 CSVs, read with pandas; SPE copies in DuckDB.
 
-## Results
-`make metrics` (Rules only, the default):
+| Component | What it does |
+|---|---|
+| `src/hdab/pipeline.py` | The single entry point: `decide` (pure), `submit`, `confirm`, `override` |
+| `src/hdab/rules.py` | The challenge's decision order, Art. 53/54/61 checks, trace with evidence words, prompt-injection check |
+| `src/hdab/plan.py`, `vocab.py` | Definitions to query plan. Every word must be claimed by the parser, otherwise the request goes to review |
+| `src/hdab/definitions.py`, `icd10.py`, `sanity.py` | Do the codes mean what the definition says? Does the request make sense at all? Finds contradictory ages and empty cohorts |
+| `src/hdab/stats.py`, `sql.py` | Small-cell-safe statistics, and the generated SQL that must reproduce them |
+| `src/hdab/spe.py`, `rstudio.py` | Permit, cohort copy, blocked downloads, RStudio with `--network none` |
+| `src/hdab/kev.py`, `assist.py` | The only places a model is called. Fixed, typed questions; a draft helper that decides nothing |
+| `src/hdab/register.py`, `views.py`, `api.py` | Audit log, role-based views (applicants never see review reasons or model answers), FastAPI ([endpoints](docs/API.md)) |
+| `frontend/` | React and TypeScript. It only renders; every decision comes from the backend |
 
-| | R01 | R02 | R03 | R04 | R05 | R06 | R07 | R08 | R09 | R10 |
-|---|---|---|---|---|---|---|---|---|---|---|
-| decision + articles | ok | ok | ok | ok | ok | ok | ok | ok | ok | ok |
-| numbers | ok | – | ok | – | ok | – | ok | ok | ok | – |
+Data stays where it is: pandas over the CSVs, one central store, no OMOP or FHIR conversion. **Patient-level data never leaves the app.** Models receive request text only.
 
-Decisions 10/10 · numbers 6/6 · leaks 0 · same in 3 runs 10/10 · slowest 0.06 s. `make redteam`: 30/30 as expected,
-0 silent wrong approvals, 0 wrong numbers.
-`make jury` (49 unseen jury-style cases, expected outcomes written first, numbers from an independent oracle): new 14/14,
-messy 18/18, broken or nonsensical 17/17, 0 silent wrong approvals, 0 wrong numbers, 0 leaks
-([`docs/findings/jury-simulation.md`](docs/findings/jury-simulation.md)).
+## Models: flagship today, your own hardware tomorrow
 
-`make compare` (S-069):
+The demo runs the strongest models we could reach, because that is what the numbers justify. Both are **closed, hosted services**: their weights cannot be self-hosted. So each one has an open replacement behind one setting, and the rules work with no model at all.
 
-| metric | Rules only | Kev-assisted |
-|---|---|---|
-| decisions (10) | 10 | 10 |
-| numbers (6) | 6 | 6 |
-| R01–R10 flagged for review | 0 | 10 |
-| red team as expected | 30/30 | 22/30 |
-| silent wrong approvals | 0 | 0 |
-| same in 3 runs | 10 | 10 |
-| slowest | 0.06 s | 0.43 s |
+| Job | In the demo (closed, hosted) | Self-hosted replacement (open weights) | Status of the replacement |
+|---|---|---|---|
+| Reads the purpose, can reject or flag | TypeSafe **Jev** | **Kev-4B**, Apache-2.0: `KEV_PROVIDER=kev` | Deployed and measured on an RTX 4060 Ti. It understands the text but is not yet calibrated: holdout 2 at 8/17, 1 silent. **Not at Jev's level** |
+| | | **Kev-27B** on one RTX PRO 6000 | **The way to run without a hosted model. Not deployed or measured here** |
+| Helps applicants write | Anthropic **Claude Opus 5.5** | **Qwen3.8 27B**, Apache-2.0: `ASSIST_PROVIDER=ollama` | Ran through the app on an RTX A5000, about 6 s for a draft. Output quality not formally compared |
+| Decides | Nobody but the rules and the officer | Rules only: `KEV_MODE=off` | **10/10, 6/6 with no model at all**, but see holdout 2 above |
 
-Kev agrees with the rules on whether a purpose is prohibited 10/10, but its confidences are low (median 0.48 for the
-category question), so at the 0.80 threshold every request is flagged. **Rules only ships as the default** (`DECISIONS.md` D-06).
+**What goes out, in demo mode:** request text, including the applicant's name, to TypeSafe; the draft's purpose, question and definitions plus the rules' findings to Anthropic. Never patient rows. In Jev-led mode the app is an AI system under the EU AI Act. With `KEV_MODE=off` and the writing help off, it has no machine-learned component.
 
-### Jev-led mode (`DECISIONS.md` D-08)
-`KEV_MODE=led KEV_PROVIDER=jev` (key `TYPESAFE_API_KEY` in `.env`): hosted Jev reads the purpose and can reject what the
-keywords miss; it never approves alone, and keyword rules stay as the floor. `scripts/compare_led.py`:
+## Open source
 
-| | Rules only | Jev-led |
-|---|---|---|
-| R01–R10 decisions / numbers / flagged | 10/10 · 6/6 · none | 10/10 · 6/6 · none |
-| red team (30, tuned on) | 30/30, 0 silent | 28/30, 0 silent |
-| holdout 1 (17, rules tuned after) | 15/17, 0 silent | 15/17, 0 silent |
-| **holdout 2 (17, unseen)** | **8/17, 2 silent** | **16/17, 0 silent** |
-| slowest request | 0.06 s | 1.8 s |
+Everything we run ourselves is open source. Our code is [MIT](LICENSE). The hosted models above are the deliberate exception and are listed as closed.
 
-"Silent" = a wrong approval without a review flag. Not as expected in Jev-led: harmless studies that contain a
-prohibited word (tobacco cessation, research on premiums, on marketing of sugary drinks) go to review instead of
-approval, by design; one R09 paraphrase is flagged by the new "could identify people" question. In this mode request
-text goes to TypeSafe and the app is an AI system under the AI Act; both are parked until the base is strong.
-
-## WHO ICD-10 file (not in this repo)
-The definition check (M-27, `src/hdab/definitions.py`) compares ICD-10 codes with WHO's wording. WHO holds the copyright
-and redistribution needs its permission, so `data/icd10/` is gitignored and the file must never be committed.
-
-1. Get the English ICD-10 2019 ClaML file (`icd102019en.xml`) from WHO via <https://icd.who.int/browse10>; WHO's terms apply to your copy.
-2. Put it at `data/icd10/icd102019en.xml`, or set `ICD10_XML` to its path.
-
-Without it the app still runs and gives the same decisions and numbers, but it says ICD-10 codes were not checked: no
-warning on R03, no wrong-code warnings, and the model is not asked. The tests that need the file are skipped.
-
-## Licences (S-085)
 | Component | Licence |
 |---|---|
-| duckdb | MIT |
-| fastapi, pydantic, rich, pytest, ruff | MIT |
-| pandas, numpy, httpx, uvicorn, starlette, python-dotenv | BSD-3-Clause (numpy also 0BSD, MIT, Zlib parts) |
-| Kev server code (`jaredpalmer/kev`, optional) | Apache-2.0 |
-| Kev-4B weights `jaredpalmer/kev-4b@v1.0` (optional) | Apache-2.0 (S-031) |
+| This repository | MIT |
+| fastapi, pydantic, rich, duckdb, pytest, ruff | MIT |
+| pandas, numpy, httpx, uvicorn, starlette, python-dotenv | BSD-3-Clause (numpy also has 0BSD, MIT, Zlib and CC0-1.0 parts) |
+| anthropic Python SDK | Apache-2.0 |
+| React, React Router, Vite | MIT |
+| TypeScript | Apache-2.0 |
+| Atkinson Hyperlegible and Source Serif fonts | OFL-1.1 |
+| RStudio Server in the SPE (`rocker/rstudio`) | AGPL-3 |
+| R, DuckDB R driver | GPL, MIT |
+| nginx (RStudio proxy) | BSD-2-Clause |
+| Ollama | MIT |
+| Kev server code and Kev-4B weights (optional) | Apache-2.0 |
+| `qwen3.8:27b` weights (optional) | Apache-2.0 |
 | Qwen3.5-4B-Base, Kev's base model (optional) | ⏳ not verified yet |
-| NVIDIA CUDA runtime libraries used by Kev (optional) | ⏳ proprietary; open question against S-085 |
-| TypeSafe Jev (hosted, optional) | closed model, exempt under S-085 (S-084) |
-| Claude Opus 5.5 (hosted, writing help, optional) | closed model, exempt under S-085 (S-084) |
-| anthropic Python SDK | MIT |
-| Ollama (writing help, self-hosted option) | MIT |
-| `qwen3.8:27b` weights (writing help, self-hosted option) | Apache-2.0 |
-| WHO ICD-10 2019 (`data/icd10/`, optional, not in this repo) | © WHO; redistribution needs WHO's permission |
-| RStudio Server (optional, Docker image) | AGPL-3.0 |
-| nginx (optional, Docker image) | BSD-2-Clause |
+| NVIDIA CUDA runtime, used by Kev (optional) | ⏳ proprietary; an open question against our own open-source rule |
+| TypeSafe Jev, Claude Opus 5.5 (hosted, optional) | **closed** |
+| WHO ICD-10 2019 file (optional, not in this repo) | © WHO; redistribution needs permission |
 
-## Models
-What we run ourselves is open source (S-085). Hosted models are allowed and receive request text only, never
-patient-level data (S-084). To run without a hosted model, a self-hosted Kev-27B on one RTX PRO 6000 is the way; that
-setup was not deployed or measured here (S-086).
-- **Writing help (S-087):** "Help me write this" on the applicant form uses hosted Claude Opus 5.5 (self-hosted Qwen3.8 27B is an option) and
-  explains the pre-check and drafts the question and definitions. The rules re-check every draft and it decides nothing; off
-  unless `ASSIST_ENABLED=true`. Setup: [`docs/SETUP-assist.md`](docs/SETUP-assist.md).
-- **Rules only is the code default:** with `KEV_MODE=off` the app uses only hand-written rules, with no machine-learned
-  component (S-052, S-053). `make dev` and `make seed` turn on Jev-led mode for the demo (D-08), where a hosted model reads the purpose and the app is an AI system under the AI Act.
-- **Kev-4B** (Apache-2.0) is the optional typed decision model (S-031). It runs as its own process on the GPU machine
-  (RTX 4060 Ti, 16 GB), from <https://github.com/jaredpalmer/kev>:
-  ```bash
-  git clone https://github.com/jaredpalmer/kev && cd kev
-  uv sync --extra serve
-  uv run --extra serve python -m kev.serve --run jaredpalmer/kev-4b@v1.0 --port 8009
-  ```
-  The app calls `POST $KEV_BASE_URL/v1/systemone` (default `http://127.0.0.1:8009`). From another machine use
-  `ssh -L 8009:127.0.0.1:8009 <gpu-host>`.
-  On the GPU machine `scripts/kev.sh start|stop` runs it on demand. Don't `pip install kev`: that is an unrelated PyPI package.
-- **Ollama (optional):** only models with Apache-2.0 or MIT weights, and only if they fit beside Kev.
+## Run it yourself
 
-## Ports
-| Port | Service |
+You need [`uv`](https://docs.astral.sh/uv/) and Node. **No API key is needed** for rules-only mode, which still scores 10/10 and 6/6.
+
+```bash
+git clone --recursive https://github.com/noah-stockinger/ehds-access-body.git && cd ehds-access-body
+uv sync
+make seed KEV_MODE=off && make dev KEV_MODE=off ASSIST_ENABLED=false    # API on :8000, docs at /docs
+cd frontend && npm install && npm run dev                               # second terminal: http://localhost:5173
+```
+
+**The full demo:** `cp .env.example .env`, add `TYPESAFE_API_KEY` and `ANTHROPIC_API_KEY`, then run plain `make seed && make dev`. Without the keys, plain `make dev` still decides correctly but flags every request for review (`Rules only (Jev unreachable)`), so use the commands above.
+
+**RStudio in the SPE** needs Docker: `make spe-image`, once.
+
+**Windows:** use `git clone --recurse-submodules`. `make` needs Git Bash or WSL; the `uv run ...` commands behind each target also work in PowerShell.
+
+**Send your own request:** the fastest jury test.
+```bash
+curl -s localhost:8000/requests -H 'content-type: application/json' -d @data/track3/requests/R01.json
+```
+
+| Command | What it does |
 |---|---|
-| 8000 | App backend (FastAPI) |
-| 5173 | Frontend dev server (Vite, [`frontend/`](frontend/README.md)) |
-| 8009 | Kev decision model (`/v1/systemone`), on the GPU machine |
-| 8080 | HAPI FHIR server (`/fhir`, optional) |
-| 11434 | Ollama (optional) |
+| `make metrics` | R01–R10 against `expected.json`, 3 runs |
+| `make jury` | 49 new, messy and broken requests |
+| `make redteam` | 30 adversarial and paraphrased requests |
+| `make test` | 360+ tests, no GPU or API key needed (34 need the WHO file and skip without it) |
+| `curl -X POST localhost:8000/demo/reset` | Clean slate: R01–R10 back as proposals |
 
+Screens and the click-by-click walkthrough: [`frontend/README.md`](frontend/README.md).
+
+**Optional ICD-10 check:** WHO's file is not redistributable, so it is not here. Put `icd102019en.xml` from <https://icd.who.int/browse10> in `data/icd10/` to get wrong-code warnings, including the one on R03. Without it, decisions and numbers are the same and the app says the codes were not checked.
+
+## What works and what does not
+
+**Works end to end:** the 10 requests and new ones, both roles, confirm and override (overriding deletes the SPE and ends the RStudio session), blocked downloads, the audit log, CSV export of released statistics.
+
+**Does not, and we would rather you hear it from us:**
+
+- **Unusual wording goes to review with no numbers.** The definition parser uses sentence templates. That is safe, but a valid request in an unfamiliar phrasing waits for a person instead of being answered.
+- **Rules alone are weak on unseen wording** (holdout 2: 8/17, 2 silent). That is why the demo uses a model, at the cost of sending request text out.
+- **`POST /requests` returns numbers immediately**, so the metrics can be measured automatically. Only the web screens hold them back until staff confirm ([D-05](DECISIONS.md)).
+- **No accounts.** Anyone who can reach the backend can act as staff, and the officer name is typed in. The same goes for the RStudio port, which has no login ([D-10, D-11](DECISIONS.md)). Fine for synthetic data; required work before anything real.
+- **The screen is still a way out.** A determined SPE user can copy what the browser displays. Results export review is not built, and what happens inside an R session is not logged.
+- **Self-hosted is not yet at flagship quality** for the purpose reader. See [Models](#models-flagship-today-your-own-hardware-tomorrow).
+- **Not certified.** A prototype, with no conformity assessment. Legal readings are ours, and [some are still being checked](docs/findings/article-check.md).
+
+Every call we made where the specs conflicted is written down, with its costs, in [`DECISIONS.md`](DECISIONS.md).
+
+## Find your way around
+
+[`SPECS.md`](SPECS.md): the binding rules, each with a check · [`DECISIONS.md`](DECISIONS.md): trade-offs · [`docs/API.md`](docs/API.md): endpoints · [`docs/findings/`](docs/findings/): test reports · [`docs/SETUP-assist.md`](docs/SETUP-assist.md): self-hosting the writing help
+
+**Synthetic data only.** The challenge and data are the organisers' ([`data/track3`](data/track3/README.md), a git submodule).
