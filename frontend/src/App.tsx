@@ -10,7 +10,7 @@ export default function App() {
     <BrowserRouter>
       <DemoBar />
       <Routes>
-        <Route path="/" element={<Navigate to="/staff" replace />} />
+        <Route path="/" element={<Navigate to="/apply" replace />} />
         <Route path="/apply" element={<Apply />} />
         <Route path="/applicant/:id" element={<ApplicantView />} />
         <Route path="/staff" element={<Staff />} />
