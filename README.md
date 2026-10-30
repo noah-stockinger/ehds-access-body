@@ -8,7 +8,7 @@
 
 **10/10** correct decisions · **6/6** correct numbers · **0** privacy leaks · **10/10** consistent over 3 runs · **2.07 s** slowest answer (target: 60 s)
 
-![Staff console: R02 proposed for rejection under Art. 54(1)(b), with the reason, the mode and the officer's decision buttons](docs/img/staff-reject.png)
+![Staff console: an officer opens a proposed rejection, filters the inbox, then confirms and releases a statistics request](docs/img/simple-staff-view.gif)
 
 > **Demo video:** ⏳ link added at submission · **Metrics:** [results on the 10 requests](#metric-results) · **Run it:** [five commands](#run-it-yourself)
 
@@ -26,7 +26,9 @@ Most LLM demos ask you to trust the model. We built an access body that cannot b
 ## What the jury can try
 
 ### Rejected, with the law and the words that triggered it
-Above: R02, an insurer's pricing department, stopped at Art. 54(1)(b), with the trigger word `premiums` quoted. No data is released, and the applicant reads the same reason in plain language.
+R02, an insurer's pricing department, stopped at Art. 54(1)(b), with the trigger word `premiums` quoted. No data is released, and the applicant reads the same reason in plain language.
+
+![Staff console: R02 proposed for rejection under Art. 54(1)(b), with the reason, the mode and the officer's decision buttons](docs/img/staff-reject.png)
 
 ### Numbers an applicant can trust, released only after an officer confirms
 
@@ -38,7 +40,11 @@ R05 gets a permit and a DuckDB workspace holding exactly the **1,152** selected 
 
 ![Secure workspace for R05: cohort of 1,152, zero opted-out IDs, download blocked under Art. 73 and logged, and the data permit](docs/img/spe-blocked.png)
 
-And it is not a mock-up. Researchers get a live RStudio session. In this one, R reads the cohort, `download.file` cannot reach the internet, and `DELETE` hits a read-only database:
+And it is not a mock-up. From the permit, researchers open a live RStudio session:
+
+![From the data permit to the secure workspace to RStudio, where R counts 1152 patients](docs/img/rstudio-demo.gif)
+
+In this session, R reads the cohort, `download.file` cannot reach the internet, and `DELETE` hits a read-only database:
 
 ![RStudio inside the SPE: the patient count returns 1152, download.file fails to resolve the host, DELETE fails on a read-only database](docs/img/rstudio.png)
 
@@ -52,7 +58,7 @@ The challenge warns that the jury can filter by main diagnosis (`primary_icd10`)
 
 The pre-check restates each definition in plain English, and the applicant must confirm that reading. An access application that does not say why statistics are not enough is refused here.
 
-<img src="docs/img/precheck.png" alt="Pre-check: likely approved as statistics under Art. 53 and 69, followed by the plain-English reading of each definition" width="760">
+![Pre-check: likely approved as statistics under Art. 53 and 69, the plain-English reading of each definition, the applicant confirms and submits](docs/img/check-my-draft.gif)
 
 Stuck? **Help me write this** drafts the question and definitions. The rules re-check every draft, the applicant must accept it, and the app warns when words go missing. Here it noticed "main diagnosis" had been dropped:
 
@@ -61,6 +67,8 @@ Stuck? **Help me write this** drafts the question and definitions. The rules re-
 ### An audit trail staff can open line by line
 
 Every rule step and every model answer is its own entry, with its evidence or the model's instructions, input and probabilities. Numbers stay out of the log.
+
+![Staff console: the rules checked in order, the model's answers with confidence, then the audit log opened to one rule's evidence](docs/img/audit-log.gif)
 
 ![Audit log: rule steps, Jev's answers with probabilities, and the SQL behind the numbers marked 'gives the same numbers'](docs/img/audit-sql.png)
 
