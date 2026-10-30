@@ -8,9 +8,19 @@
 
 **10/10** correct decisions · **6/6** correct numbers · **0** privacy leaks · **10/10** consistent over 3 runs · **2.07 s** slowest answer (target: 60 s)
 
+**In this README**
+
+- [Why this one](#why-this-one): the design in six points
+- [What the jury can try](#what-the-jury-can-try): [rejections](#rejected-with-the-law-and-the-words-that-triggered-it) · [numbers](#numbers-an-applicant-can-trust-released-only-after-an-officer-confirms) · [secure environment](#a-real-secure-processing-environment-and-a-download-that-fails) · [a brand-new request](#a-brand-new-request-on-the-two-features-none-of-the-10-use) · [applicant pre-check](#applicants-see-how-the-app-reads-them-before-they-send) · [audit trail](#an-audit-trail-staff-can-open-line-by-line)
+- [Metric results](#metric-results): the 10 requests, plus what we tested beyond them
+- [Architecture](#architecture) · [Models](#models-flagship-today-your-own-hardware-tomorrow) · [Open source](#open-source)
+- [Run it yourself](#run-it-yourself): five commands
+- [What works and what does not](#what-works-and-what-does-not): the limits, stated plainly
+- [Find your way around](#find-your-way-around): specs, decisions, API, test reports
+
 ![Staff console: an officer opens a proposed rejection, filters the inbox, then confirms and releases a statistics request](docs/img/simple-staff-view.gif)
 
-> **Demo video:** ⏳ link added at submission · **Metrics:** [results on the 10 requests](#metric-results) · **Run it:** [five commands](#run-it-yourself)
+> **Demo video:** ⏳ link added at submission
 
 ## Why this one
 
