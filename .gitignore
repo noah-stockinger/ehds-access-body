@@ -1,0 +1,36 @@
+# secrets
+.env
+.env.*
+!.env.example
+
+# python
+.venv/
+.venv-*
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# large / generated
+data/icd10/
+models/
+.cache/
+tools/*.jar
+smoke-out/
+data/synthea/
+
+# personal, machine-specific setup (never pushed): notes, make overrides, venv symlinks
+LOCAL.md
+*.local
+*.local.*
+Makefile.local
+
+# Local Claude Code config (plugins/skills are per-person)
+.claude/
+
+# runtime state: register database and SPE files
+var/
+
+# design/browser tool output (Impeccable review captures, Playwright MCP logs)
+.playwright-mcp/
+.impeccable/review/

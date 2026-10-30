@@ -1,0 +1,8 @@
+local({
+  if (file.exists("/data/spe.duckdb")) {
+    con <<- DBI::dbConnect(duckdb::duckdb(), "/data/spe.duckdb", read_only = TRUE)
+    cat("Secure processing environment. Tables, read-only, through `con`:", DBI::dbListTables(con), "\n")
+    cat("Example: DBI::dbGetQuery(con, 'SELECT count(DISTINCT patient_id) FROM conditions')\n")
+    cat("Nothing can leave this workspace: no network, no downloads (Art. 73).\n")
+  }
+})

@@ -1,0 +1,1162 @@
+[
+ {
+  "name": "heart failure stays by main diagnosis per hospital",
+  "kind": "new",
+  "expect": "approve",
+  "request": {
+   "id": "J01",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "We study hospital use for heart failure to improve discharge planning.",
+   "question": "How many inpatient stays in 2025 had heart failure as the main diagnosis, per hospital?",
+   "definitions": [
+    "Heart failure stay = encounter with type 'inpatient', whose primary_icd10 starts with I50.",
+    "Count stays (not patients) whose start_date is in 2025.",
+    "Report per data_holder: heart failure stays."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "COPD prevalence per hospital",
+  "kind": "new",
+  "expect": "approve",
+  "request": {
+   "id": "J02",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on chronic lung disease to plan prevention programmes.",
+   "question": "What share of adults has COPD, per hospital?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "COPD = any condition with an ICD-10 code starting with J44.",
+    "Prevalence = adults with COPD / adults × 100, one decimal.",
+    "Report per hospital: adults, adults with COPD and the prevalence."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "mean systolic blood pressure by sex",
+  "kind": "new",
+  "expect": "approve",
+  "request": {
+   "id": "J03",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on blood pressure control in hypertension, to improve care.",
+   "question": "What is the mean systolic blood pressure of adults with hypertension, by sex?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Hypertension = any condition with an ICD-10 code starting with I10.",
+    "Use the latest systolic blood pressure (LOINC 8480-6) per patient.",
+    "Report per sex: adults with hypertension who have a systolic blood pressure value and their mean systolic blood pressure, one decimal."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "plain-English names, no codes",
+  "kind": "new",
+  "expect": "approve",
+  "request": {
+   "id": "J04",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on how new guideline treatments reach patients with heart failure.",
+   "question": "How many patients with heart failure have an active SGLT2 inhibitor, per region?",
+   "definitions": [
+    "Report per region: patients with heart failure, how many of them have an active SGLT2 inhibitor and that share in %, one decimal."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL",
+  "note": "codes inferred: I50, A10BK"
+ },
+ {
+  "name": "mean eGFR in chronic kidney disease by age band",
+  "kind": "new",
+  "expect": "approve",
+  "request": {
+   "id": "J05",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on kidney function decline in chronic kidney disease.",
+   "question": "What is the mean eGFR of adults with chronic kidney disease, by age band?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Chronic kidney disease = any condition with an ICD-10 code starting with N18.",
+    "Age bands on 31 December 2025: 18-64, 65+.",
+    "Use the latest eGFR (LOINC 62238-1) per patient.",
+    "Report per band: adults with chronic kidney disease who have an eGFR value and their mean eGFR, one decimal."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "emergency visits in 2024 per hospital",
+  "kind": "new",
+  "expect": "approve",
+  "request": {
+   "id": "J06",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Policy-making: planning emergency department capacity.",
+   "question": "How many emergency visits started in 2024, per hospital?",
+   "definitions": [
+    "Emergency visit = encounter with type 'emergency'.",
+    "Count visits (not patients) whose start_date is in 2024.",
+    "Report per data_holder: emergency visits."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "pneumonia stays per region (code only in encounters)",
+  "kind": "new",
+  "expect": "approve",
+  "request": {
+   "id": "J07",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Public health surveillance of pneumonia admissions.",
+   "question": "How many inpatient stays in 2025 had pneumonia as the main diagnosis, per region?",
+   "definitions": [
+    "Pneumonia stay = encounter with type 'inpatient', whose primary_icd10 starts with J18.",
+    "Count stays (not patients) whose start_date is in 2025.",
+    "Report per region: pneumonia stays."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "children with asthma per region (small cells)",
+  "kind": "new",
+  "expect": "approve",
+  "request": {
+   "id": "J08",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Public health research on childhood asthma.",
+   "question": "How many children have asthma, per region?",
+   "definitions": [
+    "Child = aged under 18 on 31 December 2025.",
+    "Asthma = any condition with an ICD-10 code starting with J45.",
+    "Report per region: children with asthma."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "SPE with another justification wording",
+  "kind": "new",
+  "expect": "approve",
+  "request": {
+   "id": "J09",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data access application",
+   "requested_format": "pseudonymised records",
+   "purpose": "We develop and validate an algorithm that predicts kidney decline in heart failure. We need to link the records of each patient over time, so statistics are not enough.",
+   "question": "Provide pseudonymised conditions, medications and eGFR values for adults with heart failure who have at least one eGFR value.",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Heart failure = any condition with an ICD-10 code starting with I50.",
+    "Cohort = adults with heart failure who have at least one eGFR value (LOINC 62238-1).",
+    "Report the size of the cohort you would make available."
+   ]
+  },
+  "decision": "APPROVE_SPE"
+ },
+ {
+  "name": "access application without justification per hospital",
+  "kind": "new",
+  "expect": "approve",
+  "request": {
+   "id": "J10",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data access application",
+   "requested_format": "pseudonymised records",
+   "purpose": "Quality improvement: statin use in type 2 diabetes, to update a care guideline.",
+   "question": "Provide pseudonymised records of adults with type 2 diabetes and their statins.",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Statin = ATC code starting with C10AA.",
+    "Report per hospital: adults with type 2 diabetes, % of them with an active statin."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "grouped by region and sex",
+  "kind": "new",
+  "expect": "approve",
+  "request": {
+   "id": "J11",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on obesity by region and sex, to target prevention.",
+   "question": "How many patients have obesity, by region and sex?",
+   "definitions": [
+    "Obesity = any condition with an ICD-10 code starting with E66.",
+    "Report per region and sex: patients with obesity."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "employer reassigning drivers",
+  "kind": "new",
+  "expect": "reject",
+  "request": {
+   "id": "J12",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Petra Wimmer",
+    "organisation": "AlpTrans Logistik GmbH, HR",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Our occupational health service wants to know which drivers have diabetes so that we can reassign drivers to shorter routes.",
+   "question": "How many of our drivers have type 2 diabetes, per region?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Report per region: adults with type 2 diabetes."
+   ]
+  }
+ },
+ {
+  "name": "statin advertising campaign",
+  "kind": "new",
+  "expect": "reject",
+  "request": {
+   "id": "J13",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Jan Novak",
+    "organisation": "CardioPharm GmbH, brand team",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "We plan the advertising campaign for our new statin and need to know where most patients live.",
+   "question": "How many adults with hypertension live in each region?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Hypertension = any condition with an ICD-10 code starting with I10.",
+    "Report per region: adults with hypertension."
+   ]
+  }
+ },
+ {
+  "name": "life insurer underwriting",
+  "kind": "new",
+  "expect": "reject",
+  "request": {
+   "id": "J14",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Eva Moser",
+    "organisation": "Donau Leben AG",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "We want to improve underwriting of life insurance policies for applicants with heart failure.",
+   "question": "What share of patients with heart failure is aged 65 or older?",
+   "definitions": [
+    "Heart failure = any condition with an ICD-10 code starting with I50.",
+    "Report per region: patients with heart failure."
+   ]
+  }
+ },
+ {
+  "name": "lower-case codes",
+  "kind": "wildcard",
+  "expect": "approve",
+  "request": {
+   "id": "W01",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on regional differences in type 2 diabetes.",
+   "question": "How many adults have type 2 diabetes, per region?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with e11.",
+    "Report per region: adults, adults with type 2 diabetes."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "no spaces around =, no full stops",
+  "kind": "wildcard",
+  "expect": "approve",
+  "request": {
+   "id": "W02",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on regional differences in type 2 diabetes.",
+   "question": "How many adults have type 2 diabetes, per region?",
+   "definitions": [
+    "Adult=aged 18 or older on 31 December 2025",
+    "Type 2 diabetes=any condition with an ICD-10 code starting with E11",
+    "Report per region: adults, adults with type 2 diabetes"
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "all definitions in one string, semicolons",
+  "kind": "wildcard",
+  "expect": "approve",
+  "request": {
+   "id": "W03",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on regional differences in type 2 diabetes.",
+   "question": "How many adults have type 2 diabetes, per region?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025; Type 2 diabetes = any condition with an ICD-10 code starting with E11; Report per region: adults, adults with type 2 diabetes."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "definitions as one text instead of a list",
+  "kind": "wildcard",
+  "expect": "approve",
+  "request": {
+   "id": "W04",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on regional differences in type 2 diabetes.",
+   "question": "How many adults have type 2 diabetes, per region?",
+   "definitions": "Adult = aged 18 or older on 31 December 2025.\nType 2 diabetes = any condition with an ICD-10 code starting with E11.\nReport per region: adults, adults with type 2 diabetes."
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "no id and no submitted timestamp",
+  "kind": "wildcard",
+  "expect": "approve",
+  "request": {
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on regional differences in type 2 diabetes.",
+   "question": "How many adults have type 2 diabetes, per region?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Report per region: adults, adults with type 2 diabetes."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "request type in capitals",
+  "kind": "wildcard",
+  "expect": "approve",
+  "request": {
+   "id": "W06",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "Health Data Request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on regional differences in type 2 diabetes.",
+   "question": "How many adults have type 2 diabetes, per region?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Report per region: adults, adults with type 2 diabetes."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "ICD10 without hyphen",
+  "kind": "wildcard",
+  "expect": "approve",
+  "request": {
+   "id": "W07",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on regional differences in type 2 diabetes.",
+   "question": "How many adults have type 2 diabetes, per region?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD10 code starting with E11.",
+    "Report per region: adults, adults with type 2 diabetes."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "several codes in one definition",
+  "kind": "wildcard",
+  "expect": "approve",
+  "request": {
+   "id": "W08",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on cardiovascular disease burden by hospital.",
+   "question": "How many patients have heart failure or atrial fibrillation, per hospital?",
+   "definitions": [
+    "Heart disease = any condition with an ICD-10 code starting with I50 or I48.",
+    "Report per data_holder: patients with heart disease."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "extra unknown fields",
+  "kind": "wildcard",
+  "expect": "approve",
+  "request": {
+   "id": "W09",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on regional differences in type 2 diabetes.",
+   "question": "How many adults have type 2 diabetes, per region?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Report per region: adults, adults with type 2 diabetes."
+   ],
+   "ethics_vote": "EK 1234/2026",
+   "funding": {
+    "source": "FWF",
+    "grant": "P-12345"
+   }
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "ICD-10 code without \"starting with\"",
+  "kind": "wildcard",
+  "expect": "approve",
+  "request": {
+   "id": "W12",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on regional differences in type 2 diabetes.",
+   "question": "How many adults have type 2 diabetes, per region?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = ICD-10 code E11.",
+    "Report per region: adults, adults with type 2 diabetes."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "age as 18+",
+  "kind": "wildcard",
+  "expect": "approve",
+  "request": {
+   "id": "W13",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on regional differences in type 2 diabetes.",
+   "question": "How many adults have type 2 diabetes, per region?",
+   "definitions": [
+    "Adult = aged 18+ on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Report per region: adults, adults with type 2 diabetes."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "age without the reference date",
+  "kind": "wildcard",
+  "expect": "approve",
+  "request": {
+   "id": "W14",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on regional differences in type 2 diabetes.",
+   "question": "How many adults have type 2 diabetes, per region?",
+   "definitions": [
+    "Adult = aged 18 or older.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Report per region: adults, adults with type 2 diabetes."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL",
+  "note": "the data's reference date is assumed and noted"
+ },
+ {
+  "name": "age range with between",
+  "kind": "wildcard",
+  "expect": "approve",
+  "request": {
+   "id": "W15",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Occupational health research on hypertension in working-age adults.",
+   "question": "How many working-age adults have hypertension, per hospital?",
+   "definitions": [
+    "Working age = aged between 18 and 64 on 31 December 2025.",
+    "Hypertension = any condition with an ICD-10 code starting with I10.",
+    "Report per hospital: working age, working age with hypertension."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "exclude a condition",
+  "kind": "wildcard",
+  "expect": "approve",
+  "request": {
+   "id": "W16",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on type 2 diabetes without kidney disease, to plan prevention.",
+   "question": "How many adults with type 2 diabetes but without chronic kidney disease are there, per region?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Exclude patients with chronic kidney disease.",
+    "Report per region: adults with type 2 diabetes."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "exclude opted-out patients (already done)",
+  "kind": "wildcard",
+  "expect": "approve",
+  "request": {
+   "id": "W17",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on regional differences in type 2 diabetes.",
+   "question": "How many adults have type 2 diabetes, per region?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Exclude opted-out patients.",
+    "Report per region: adults, adults with type 2 diabetes."
+   ]
+  },
+  "decision": "APPROVE_STATISTICAL"
+ },
+ {
+  "name": "exclude with a time window we cannot read",
+  "kind": "wildcard",
+  "expect": "review",
+  "request": {
+   "id": "W18",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on regional differences in type 2 diabetes.",
+   "question": "How many adults have type 2 diabetes, per region?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Exclude patients who had a stroke in the last year.",
+    "Report per region: adults, adults with type 2 diabetes."
+   ]
+  },
+  "note": "no time window template: must not guess"
+ },
+ {
+  "name": "typo in a template word",
+  "kind": "wildcard",
+  "expect": "review",
+  "request": {
+   "id": "W10",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on regional differences in type 2 diabetes.",
+   "question": "How many adults have type 2 diabetes, per region?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = any conditon with an ICD-10 code startng with E11.",
+    "Report per region: adults, adults with type 2 diabetes."
+   ]
+  },
+  "note": "must not guess what a misspelt clause means"
+ },
+ {
+  "name": "German definitions",
+  "kind": "wildcard",
+  "expect": "review",
+  "request": {
+   "id": "W11",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Wir untersuchen regionale Unterschiede bei Typ-2-Diabetes.",
+   "question": "Wie viele Erwachsene haben Typ-2-Diabetes, je Bundesland?",
+   "definitions": [
+    "Erwachsene = 18 Jahre oder älter am 31. Dezember 2025.",
+    "Typ-2-Diabetes = ICD-10-Code beginnt mit E11.",
+    "Bericht je Bundesland: Erwachsene, Erwachsene mit Typ-2-Diabetes."
+   ]
+  }
+ },
+ {
+  "name": "no definitions at all",
+  "kind": "error",
+  "expect": "review",
+  "request": {
+   "id": "E01",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on type 2 diabetes.",
+   "question": "How many adults have type 2 diabetes?",
+   "definitions": []
+  }
+ },
+ {
+  "name": "age bands outside the population",
+  "kind": "error",
+  "expect": "review",
+  "request": {
+   "id": "E02",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on type 2 diabetes in adults.",
+   "question": "How many adults have type 2 diabetes, by age band?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Age bands on 31 December 2025: 0-9, 10-17.",
+    "Report per band: adults with type 2 diabetes."
+   ]
+  },
+  "note": "every cell would be <10 because no adult is in any band"
+ },
+ {
+  "name": "inverted age range",
+  "kind": "error",
+  "expect": "review",
+  "request": {
+   "id": "E03",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on heart failure in old age.",
+   "question": "How many older patients have heart failure, per region?",
+   "definitions": [
+    "Elderly = aged 90 to 65 on 31 December 2025.",
+    "Heart failure = any condition with an ICD-10 code starting with I50.",
+    "Report per region: elderly with heart failure."
+   ]
+  }
+ },
+ {
+  "name": "overlapping age bands",
+  "kind": "error",
+  "expect": "review",
+  "request": {
+   "id": "E04",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on hypertension by age.",
+   "question": "How many adults have hypertension, by age band?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Hypertension = any condition with an ICD-10 code starting with I10.",
+    "Age bands on 31 December 2025: 18-49, 40-64, 65+.",
+    "Report per band: adults with hypertension."
+   ]
+  }
+ },
+ {
+  "name": "code that occurs nowhere in the data",
+  "kind": "error",
+  "expect": "review",
+  "request": {
+   "id": "E05",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on Gaucher disease.",
+   "question": "How many patients have Gaucher disease, per region?",
+   "definitions": [
+    "Gaucher disease = any condition with an ICD-10 code starting with E75.",
+    "Report per region: patients with Gaucher disease."
+   ]
+  }
+ },
+ {
+  "name": "measurement that occurs nowhere in the data",
+  "kind": "error",
+  "expect": "review",
+  "request": {
+   "id": "E06",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on glucose control in type 2 diabetes.",
+   "question": "What is the mean fasting glucose in type 2 diabetes, per region?",
+   "definitions": [
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Use the latest glucose (LOINC 2345-7) per patient.",
+    "Report per region: patients with type 2 diabetes who have a glucose value and their mean glucose, one decimal."
+   ]
+  }
+ },
+ {
+  "name": "year outside the data",
+  "kind": "error",
+  "expect": "review",
+  "request": {
+   "id": "E07",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Policy-making: hospital capacity planning.",
+   "question": "How many inpatient stays started in 2019, per region?",
+   "definitions": [
+    "Inpatient stay = encounter with type 'inpatient'.",
+    "Count stays (not patients) whose start_date is in 2019.",
+    "Report per region: inpatient stays."
+   ]
+  },
+  "note": "data runs 2023-2025"
+ },
+ {
+  "name": "statistics request that asks for records",
+  "kind": "error",
+  "expect": "review",
+  "request": {
+   "id": "E08",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "pseudonymised records",
+   "purpose": "Research on regional differences in type 2 diabetes.",
+   "question": "How many adults have type 2 diabetes, per region?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Report per region: adults, adults with type 2 diabetes."
+   ]
+  },
+  "note": "requested_as and requested_format contradict each other"
+ },
+ {
+  "name": "same term defined twice",
+  "kind": "error",
+  "expect": "review",
+  "request": {
+   "id": "E09",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on regional differences in diabetes.",
+   "question": "How many patients have diabetes, per region?",
+   "definitions": [
+    "Diabetes = any condition with an ICD-10 code starting with E11.",
+    "Diabetes = any condition with an ICD-10 code starting with E10.",
+    "Report per region: patients with diabetes."
+   ]
+  }
+ },
+ {
+  "name": "gibberish purpose and question",
+  "kind": "error",
+  "expect": "review",
+  "request": {
+   "id": "E10",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "asdf qwer lorem ipsum.",
+   "question": "zzz?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Report per region: adults, adults with type 2 diabetes."
+   ]
+  }
+ },
+ {
+  "name": "question asks for something the definitions do not",
+  "kind": "error",
+  "expect": "review",
+  "request": {
+   "id": "E11",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on body weight in type 2 diabetes.",
+   "question": "What is the mean BMI of adults with type 2 diabetes, per region?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Use the latest HbA1c (LOINC 4548-4) per patient.",
+    "Report per region: adults with type 2 diabetes who have a HbA1c value and their mean HbA1c, one decimal."
+   ]
+  },
+  "note": "question says BMI, definitions compute HbA1c"
+ },
+ {
+  "name": "SPE cohort that nobody matches",
+  "kind": "error",
+  "expect": "review",
+  "request": {
+   "id": "E12",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data access application",
+   "requested_format": "pseudonymised records",
+   "purpose": "We train a model on patient histories of very old adults with type 2 diabetes; aggregates are not enough.",
+   "question": "Provide pseudonymised conditions and medications for patients aged 120 or older with type 2 diabetes.",
+   "definitions": [
+    "Very old = aged 120 or older on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Cohort = very old with type 2 diabetes.",
+    "Report the size of the cohort you would make available."
+   ]
+  }
+ },
+ {
+  "name": "report per band without bands",
+  "kind": "error",
+  "expect": "review",
+  "request": {
+   "id": "E13",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on type 2 diabetes by age.",
+   "question": "How many adults have type 2 diabetes, by age band?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Report per band: adults with type 2 diabetes."
+   ]
+  }
+ },
+ {
+  "name": "mean of a diagnosis",
+  "kind": "error",
+  "expect": "review",
+  "request": {
+   "id": "E14",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on type 2 diabetes.",
+   "question": "What is the mean type 2 diabetes per region?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Report per region: adults with type 2 diabetes and their mean type 2 diabetes."
+   ]
+  }
+ },
+ {
+  "name": "missing purpose",
+  "kind": "error",
+  "expect": "invalid",
+  "request": {
+   "id": "E15",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "question": "How many adults have type 2 diabetes?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Report per region: adults."
+   ]
+  }
+ },
+ {
+  "name": "unknown request type",
+  "kind": "error",
+  "expect": "invalid",
+  "request": {
+   "id": "E16",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "please give me everything",
+   "requested_format": "all",
+   "purpose": "Research on type 2 diabetes.",
+   "question": "How many adults have type 2 diabetes?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2025.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Report per region: adults."
+   ]
+  }
+ },
+ {
+  "name": "reference date that is not the data's",
+  "kind": "error",
+  "expect": "review",
+  "request": {
+   "id": "E17",
+   "submitted": "2026-10-30T10:00:00+01:00",
+   "applicant": {
+    "name": "Dr. Sophie Lang",
+    "organisation": "Medical University of Graz, Institute of Epidemiology",
+    "country": "AT"
+   },
+   "requested_as": "health data request",
+   "requested_format": "anonymised statistics",
+   "purpose": "Research on type 2 diabetes.",
+   "question": "How many adults had type 2 diabetes at the end of 2023, per region?",
+   "definitions": [
+    "Adult = aged 18 or older on 31 December 2023.",
+    "Type 2 diabetes = any condition with an ICD-10 code starting with E11.",
+    "Report per region: adults with type 2 diabetes."
+   ]
+  }
+ }
+]

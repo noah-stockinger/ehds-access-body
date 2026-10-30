@@ -1,0 +1,211 @@
+patient_id,icd10,description,onset_date
+g-00181,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00182,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00183,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00184,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00185,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00186,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00187,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00188,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00189,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00190,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00191,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00192,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00193,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00194,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00195,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00196,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00197,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00198,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00199,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00200,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00201,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00202,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00203,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00204,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00205,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00206,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00207,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00208,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00209,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00210,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00211,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00212,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00213,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00214,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00215,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00216,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00217,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00218,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00219,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00220,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00221,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00222,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00223,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00224,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00225,E11.9,Type 2 diabetes mellitus without complications,2020-01-01
+g-00226,I10,Essential (primary) hypertension,2020-01-01
+g-00227,I10,Essential (primary) hypertension,2020-01-01
+g-00228,I10,Essential (primary) hypertension,2020-01-01
+g-00229,I10,Essential (primary) hypertension,2020-01-01
+g-00230,I10,Essential (primary) hypertension,2020-01-01
+g-00231,I10,Essential (primary) hypertension,2020-01-01
+g-00232,I10,Essential (primary) hypertension,2020-01-01
+g-00233,I10,Essential (primary) hypertension,2020-01-01
+g-00234,I10,Essential (primary) hypertension,2020-01-01
+g-00235,I10,Essential (primary) hypertension,2020-01-01
+g-00236,I10,Essential (primary) hypertension,2020-01-01
+g-00237,I10,Essential (primary) hypertension,2020-01-01
+g-00238,I10,Essential (primary) hypertension,2020-01-01
+g-00239,I10,Essential (primary) hypertension,2020-01-01
+g-00240,I10,Essential (primary) hypertension,2020-01-01
+g-00241,I10,Essential (primary) hypertension,2020-01-01
+g-00242,I10,Essential (primary) hypertension,2020-01-01
+g-00243,I10,Essential (primary) hypertension,2020-01-01
+g-00244,I10,Essential (primary) hypertension,2020-01-01
+g-00245,I10,Essential (primary) hypertension,2020-01-01
+g-00246,I10,Essential (primary) hypertension,2020-01-01
+g-00247,I10,Essential (primary) hypertension,2020-01-01
+g-00248,I10,Essential (primary) hypertension,2020-01-01
+g-00249,I10,Essential (primary) hypertension,2020-01-01
+g-00250,I10,Essential (primary) hypertension,2020-01-01
+g-00251,I10,Essential (primary) hypertension,2020-01-01
+g-00252,I10,Essential (primary) hypertension,2020-01-01
+g-00253,I10,Essential (primary) hypertension,2020-01-01
+g-00254,I10,Essential (primary) hypertension,2020-01-01
+g-00255,I10,Essential (primary) hypertension,2020-01-01
+g-00256,I10,Essential (primary) hypertension,2020-01-01
+g-00257,I10,Essential (primary) hypertension,2020-01-01
+g-00258,I10,Essential (primary) hypertension,2020-01-01
+g-00259,I10,Essential (primary) hypertension,2020-01-01
+g-00260,I10,Essential (primary) hypertension,2020-01-01
+g-00261,I10,Essential (primary) hypertension,2020-01-01
+g-00262,I10,Essential (primary) hypertension,2020-01-01
+g-00263,I10,Essential (primary) hypertension,2020-01-01
+g-00264,I10,Essential (primary) hypertension,2020-01-01
+g-00265,I10,Essential (primary) hypertension,2020-01-01
+g-00266,I10,Essential (primary) hypertension,2020-01-01
+g-00267,I10,Essential (primary) hypertension,2020-01-01
+g-00268,I10,Essential (primary) hypertension,2020-01-01
+g-00269,I10,Essential (primary) hypertension,2020-01-01
+g-00270,I10,Essential (primary) hypertension,2020-01-01
+g-00271,I10,Essential (primary) hypertension,2020-01-01
+g-00272,I10,Essential (primary) hypertension,2020-01-01
+g-00273,I10,Essential (primary) hypertension,2020-01-01
+g-00274,I10,Essential (primary) hypertension,2020-01-01
+g-00275,I10,Essential (primary) hypertension,2020-01-01
+g-00276,I10,Essential (primary) hypertension,2020-01-01
+g-00277,I10,Essential (primary) hypertension,2020-01-01
+g-00278,I10,Essential (primary) hypertension,2020-01-01
+g-00279,I10,Essential (primary) hypertension,2020-01-01
+g-00280,I10,Essential (primary) hypertension,2020-01-01
+g-00281,I10,Essential (primary) hypertension,2020-01-01
+g-00282,I10,Essential (primary) hypertension,2020-01-01
+g-00283,I10,Essential (primary) hypertension,2020-01-01
+g-00284,I10,Essential (primary) hypertension,2020-01-01
+g-00285,I10,Essential (primary) hypertension,2020-01-01
+g-00286,I10,Essential (primary) hypertension,2020-01-01
+g-00287,I10,Essential (primary) hypertension,2020-01-01
+g-00288,I10,Essential (primary) hypertension,2020-01-01
+g-00289,I10,Essential (primary) hypertension,2020-01-01
+g-00290,I10,Essential (primary) hypertension,2020-01-01
+g-00291,I10,Essential (primary) hypertension,2020-01-01
+g-00292,I10,Essential (primary) hypertension,2020-01-01
+g-00293,I10,Essential (primary) hypertension,2020-01-01
+g-00294,I10,Essential (primary) hypertension,2020-01-01
+g-00295,I10,Essential (primary) hypertension,2020-01-01
+g-00296,I10,Essential (primary) hypertension,2020-01-01
+g-00297,I10,Essential (primary) hypertension,2020-01-01
+g-00298,I10,Essential (primary) hypertension,2020-01-01
+g-00299,I10,Essential (primary) hypertension,2020-01-01
+g-00300,I10,Essential (primary) hypertension,2020-01-01
+g-00301,I10,Essential (primary) hypertension,2020-01-01
+g-00302,I10,Essential (primary) hypertension,2020-01-01
+g-00303,I10,Essential (primary) hypertension,2020-01-01
+g-00304,I10,Essential (primary) hypertension,2020-01-01
+g-00305,I10,Essential (primary) hypertension,2020-01-01
+g-00306,I10,Essential (primary) hypertension,2020-01-01
+g-00307,I10,Essential (primary) hypertension,2020-01-01
+g-00308,I10,Essential (primary) hypertension,2020-01-01
+g-00309,I10,Essential (primary) hypertension,2020-01-01
+g-00310,I10,Essential (primary) hypertension,2020-01-01
+g-00311,I10,Essential (primary) hypertension,2020-01-01
+g-00312,I10,Essential (primary) hypertension,2020-01-01
+g-00313,I10,Essential (primary) hypertension,2020-01-01
+g-00314,I10,Essential (primary) hypertension,2020-01-01
+g-00315,I10,Essential (primary) hypertension,2020-01-01
+g-00316,I10,Essential (primary) hypertension,2020-01-01
+g-00317,I10,Essential (primary) hypertension,2020-01-01
+g-00318,I10,Essential (primary) hypertension,2020-01-01
+g-00319,I10,Essential (primary) hypertension,2020-01-01
+g-00320,I10,Essential (primary) hypertension,2020-01-01
+g-00321,I10,Essential (primary) hypertension,2020-01-01
+g-00322,I10,Essential (primary) hypertension,2020-01-01
+g-00323,I10,Essential (primary) hypertension,2020-01-01
+g-00324,I10,Essential (primary) hypertension,2020-01-01
+g-00325,I10,Essential (primary) hypertension,2020-01-01
+g-00326,I10,Essential (primary) hypertension,2020-01-01
+g-00327,I10,Essential (primary) hypertension,2020-01-01
+g-00328,I10,Essential (primary) hypertension,2020-01-01
+g-00329,I10,Essential (primary) hypertension,2020-01-01
+g-00330,I10,Essential (primary) hypertension,2020-01-01
+g-00331,I10,Essential (primary) hypertension,2020-01-01
+g-00332,I10,Essential (primary) hypertension,2020-01-01
+g-00333,I10,Essential (primary) hypertension,2020-01-01
+g-00334,I10,Essential (primary) hypertension,2020-01-01
+g-00335,I10,Essential (primary) hypertension,2020-01-01
+g-00336,I10,Essential (primary) hypertension,2020-01-01
+g-00337,I10,Essential (primary) hypertension,2020-01-01
+g-00338,I10,Essential (primary) hypertension,2020-01-01
+g-00339,I10,Essential (primary) hypertension,2020-01-01
+g-00340,I10,Essential (primary) hypertension,2020-01-01
+g-00341,I10,Essential (primary) hypertension,2020-01-01
+g-00342,I10,Essential (primary) hypertension,2020-01-01
+g-00343,I10,Essential (primary) hypertension,2020-01-01
+g-00344,I10,Essential (primary) hypertension,2020-01-01
+g-00345,I10,Essential (primary) hypertension,2020-01-01
+g-00346,I10,Essential (primary) hypertension,2020-01-01
+g-00347,I10,Essential (primary) hypertension,2020-01-01
+g-00348,I10,Essential (primary) hypertension,2020-01-01
+g-00349,I10,Essential (primary) hypertension,2020-01-01
+g-00350,I10,Essential (primary) hypertension,2020-01-01
+g-00351,I10,Essential (primary) hypertension,2020-01-01
+g-00352,I10,Essential (primary) hypertension,2020-01-01
+g-00353,I10,Essential (primary) hypertension,2020-01-01
+g-00354,I10,Essential (primary) hypertension,2020-01-01
+g-00355,I10,Essential (primary) hypertension,2020-01-01
+g-00356,I10,Essential (primary) hypertension,2020-01-01
+g-00357,I10,Essential (primary) hypertension,2020-01-01
+g-00358,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00359,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00360,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00361,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00362,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00363,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00364,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00365,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00366,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00367,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00368,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00369,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00370,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00371,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00372,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00373,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00374,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00375,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00376,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00377,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00378,C50.9,"Malignant neoplasm of breast, unspecified",2020-01-01
+g-00379,I48.0,Paroxysmal atrial fibrillation,2020-01-01
+g-00380,I48.0,Paroxysmal atrial fibrillation,2020-01-01
+g-00381,I48.0,Paroxysmal atrial fibrillation,2020-01-01
+g-00382,I48.0,Paroxysmal atrial fibrillation,2020-01-01
+g-00383,I48.0,Paroxysmal atrial fibrillation,2020-01-01
+g-00384,I48.0,Paroxysmal atrial fibrillation,2020-01-01
+g-00385,I48.0,Paroxysmal atrial fibrillation,2020-01-01
+g-00386,I48.0,Paroxysmal atrial fibrillation,2020-01-01
+g-00387,I48.0,Paroxysmal atrial fibrillation,2020-01-01
+g-00388,I48.0,Paroxysmal atrial fibrillation,2020-01-01
+g-00389,I48.3,Typical atrial flutter,2020-01-01
+g-00390,I48.3,Typical atrial flutter,2020-01-01

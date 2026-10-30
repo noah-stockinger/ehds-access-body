@@ -1,0 +1,3 @@
+[submodule "data/track3"]
+	path = data/track3
+	url = https://github.com/AIM-Austria/TRACK-3-ehds.git

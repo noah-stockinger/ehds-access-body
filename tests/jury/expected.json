@@ -1,0 +1,767 @@
+{
+ "J01": {
+  "Klinikum Nord": {
+   "heart_failure_stays": 66
+  },
+  "Klinikum Süd": {
+   "heart_failure_stays": 60
+  },
+  "Klinikum West": {
+   "heart_failure_stays": 31
+  }
+ },
+ "J02": {
+  "Klinikum Nord": {
+   "adults": 5881,
+   "adults_with_copd": 123,
+   "prevalence_pct": 2.1
+  },
+  "Klinikum Süd": {
+   "adults": 5197,
+   "adults_with_copd": 124,
+   "prevalence_pct": 2.4
+  },
+  "Klinikum West": {
+   "adults": 3638,
+   "adults_with_copd": 94,
+   "prevalence_pct": 2.6
+  }
+ },
+ "J03": {
+  "female": {
+   "n": 886,
+   "mean": 144.9
+  },
+  "male": {
+   "n": 812,
+   "mean": 145.3
+  }
+ },
+ "J04": {
+  "Burgenland": {
+   "n": "<10",
+   "with": "<10",
+   "share": "suppressed"
+  },
+  "Kärnten": {
+   "n": 16,
+   "with": "<10",
+   "share": "suppressed"
+  },
+  "Niederösterreich": {
+   "n": 63,
+   "with": "<10",
+   "share": "suppressed"
+  },
+  "Oberösterreich": {
+   "n": 50,
+   "with": "<10",
+   "share": "suppressed"
+  },
+  "Salzburg": {
+   "n": 19,
+   "with": "<10",
+   "share": "suppressed"
+  },
+  "Steiermark": {
+   "n": 36,
+   "with": "<10",
+   "share": "suppressed"
+  },
+  "Tirol": {
+   "n": 24,
+   "with": "<10",
+   "share": "suppressed"
+  },
+  "Vorarlberg": {
+   "n": 13,
+   "with": "<10",
+   "share": "suppressed"
+  },
+  "Wien": {
+   "n": 64,
+   "with": "<10",
+   "share": "suppressed"
+  }
+ },
+ "J05": {
+  "18-64": {
+   "n": 70,
+   "mean": 45.1
+  },
+  "65+": {
+   "n": 344,
+   "mean": 44.6
+  }
+ },
+ "J06": {
+  "Klinikum Nord": {
+   "emergency_visits": 464
+  },
+  "Klinikum Süd": {
+   "emergency_visits": 410
+  },
+  "Klinikum West": {
+   "emergency_visits": 266
+  }
+ },
+ "J07": {
+  "Burgenland": {
+   "pneumonia_stays": "<10"
+  },
+  "Kärnten": {
+   "pneumonia_stays": "<10"
+  },
+  "Niederösterreich": {
+   "pneumonia_stays": 13
+  },
+  "Oberösterreich": {
+   "pneumonia_stays": 26
+  },
+  "Salzburg": {
+   "pneumonia_stays": "<10"
+  },
+  "Steiermark": {
+   "pneumonia_stays": "<10"
+  },
+  "Tirol": {
+   "pneumonia_stays": 12
+  },
+  "Vorarlberg": {
+   "pneumonia_stays": "<10"
+  },
+  "Wien": {
+   "pneumonia_stays": 15
+  }
+ },
+ "J08": {
+  "Burgenland": {
+   "children_with_asthma": "<10"
+  },
+  "Kärnten": {
+   "children_with_asthma": 10
+  },
+  "Niederösterreich": {
+   "children_with_asthma": 55
+  },
+  "Oberösterreich": {
+   "children_with_asthma": 25
+  },
+  "Salzburg": {
+   "children_with_asthma": 17
+  },
+  "Steiermark": {
+   "children_with_asthma": 27
+  },
+  "Tirol": {
+   "children_with_asthma": 15
+  },
+  "Vorarlberg": {
+   "children_with_asthma": "<10"
+  },
+  "Wien": {
+   "children_with_asthma": 49
+  }
+ },
+ "J09": {
+  "cohort_size": 35
+ },
+ "J10": {
+  "Klinikum Nord": {
+   "n": 466,
+   "share": 38.2
+  },
+  "Klinikum Süd": {
+   "n": 405,
+   "share": 42.5
+  },
+  "Klinikum West": {
+   "n": 281,
+   "share": 43.8
+  }
+ },
+ "J11": {
+  "Burgenland": {
+   "female": {
+    "patients_with_obesity": 44
+   },
+   "male": {
+    "patients_with_obesity": 48
+   }
+  },
+  "Kärnten": {
+   "female": {
+    "patients_with_obesity": 62
+   },
+   "male": {
+    "patients_with_obesity": 64
+   }
+  },
+  "Niederösterreich": {
+   "female": {
+    "patients_with_obesity": 226
+   },
+   "male": {
+    "patients_with_obesity": 221
+   }
+  },
+  "Oberösterreich": {
+   "female": {
+    "patients_with_obesity": 213
+   },
+   "male": {
+    "patients_with_obesity": 187
+   }
+  },
+  "Salzburg": {
+   "female": {
+    "patients_with_obesity": 66
+   },
+   "male": {
+    "patients_with_obesity": 85
+   }
+  },
+  "Steiermark": {
+   "female": {
+    "patients_with_obesity": 181
+   },
+   "male": {
+    "patients_with_obesity": 148
+   }
+  },
+  "Tirol": {
+   "female": {
+    "patients_with_obesity": 107
+   },
+   "male": {
+    "patients_with_obesity": 93
+   }
+  },
+  "Vorarlberg": {
+   "female": {
+    "patients_with_obesity": 55
+   },
+   "male": {
+    "patients_with_obesity": 60
+   }
+  },
+  "Wien": {
+   "female": {
+    "patients_with_obesity": 305
+   },
+   "male": {
+    "patients_with_obesity": 271
+   }
+  }
+ },
+ "W01": {
+  "Burgenland": {
+   "adults": 532,
+   "adults_with_type_2_diabetes": 33
+  },
+  "Kärnten": {
+   "adults": 885,
+   "adults_with_type_2_diabetes": 71
+  },
+  "Niederösterreich": {
+   "adults": 2740,
+   "adults_with_type_2_diabetes": 227
+  },
+  "Oberösterreich": {
+   "adults": 2473,
+   "adults_with_type_2_diabetes": 173
+  },
+  "Salzburg": {
+   "adults": 908,
+   "adults_with_type_2_diabetes": 75
+  },
+  "Steiermark": {
+   "adults": 2052,
+   "adults_with_type_2_diabetes": 164
+  },
+  "Tirol": {
+   "adults": 1240,
+   "adults_with_type_2_diabetes": 110
+  },
+  "Vorarlberg": {
+   "adults": 639,
+   "adults_with_type_2_diabetes": 36
+  },
+  "Wien": {
+   "adults": 3247,
+   "adults_with_type_2_diabetes": 263
+  }
+ },
+ "W02": {
+  "Burgenland": {
+   "adults": 532,
+   "adults_with_type_2_diabetes": 33
+  },
+  "Kärnten": {
+   "adults": 885,
+   "adults_with_type_2_diabetes": 71
+  },
+  "Niederösterreich": {
+   "adults": 2740,
+   "adults_with_type_2_diabetes": 227
+  },
+  "Oberösterreich": {
+   "adults": 2473,
+   "adults_with_type_2_diabetes": 173
+  },
+  "Salzburg": {
+   "adults": 908,
+   "adults_with_type_2_diabetes": 75
+  },
+  "Steiermark": {
+   "adults": 2052,
+   "adults_with_type_2_diabetes": 164
+  },
+  "Tirol": {
+   "adults": 1240,
+   "adults_with_type_2_diabetes": 110
+  },
+  "Vorarlberg": {
+   "adults": 639,
+   "adults_with_type_2_diabetes": 36
+  },
+  "Wien": {
+   "adults": 3247,
+   "adults_with_type_2_diabetes": 263
+  }
+ },
+ "W03": {
+  "Burgenland": {
+   "adults": 532,
+   "adults_with_type_2_diabetes": 33
+  },
+  "Kärnten": {
+   "adults": 885,
+   "adults_with_type_2_diabetes": 71
+  },
+  "Niederösterreich": {
+   "adults": 2740,
+   "adults_with_type_2_diabetes": 227
+  },
+  "Oberösterreich": {
+   "adults": 2473,
+   "adults_with_type_2_diabetes": 173
+  },
+  "Salzburg": {
+   "adults": 908,
+   "adults_with_type_2_diabetes": 75
+  },
+  "Steiermark": {
+   "adults": 2052,
+   "adults_with_type_2_diabetes": 164
+  },
+  "Tirol": {
+   "adults": 1240,
+   "adults_with_type_2_diabetes": 110
+  },
+  "Vorarlberg": {
+   "adults": 639,
+   "adults_with_type_2_diabetes": 36
+  },
+  "Wien": {
+   "adults": 3247,
+   "adults_with_type_2_diabetes": 263
+  }
+ },
+ "W04": {
+  "Burgenland": {
+   "adults": 532,
+   "adults_with_type_2_diabetes": 33
+  },
+  "Kärnten": {
+   "adults": 885,
+   "adults_with_type_2_diabetes": 71
+  },
+  "Niederösterreich": {
+   "adults": 2740,
+   "adults_with_type_2_diabetes": 227
+  },
+  "Oberösterreich": {
+   "adults": 2473,
+   "adults_with_type_2_diabetes": 173
+  },
+  "Salzburg": {
+   "adults": 908,
+   "adults_with_type_2_diabetes": 75
+  },
+  "Steiermark": {
+   "adults": 2052,
+   "adults_with_type_2_diabetes": 164
+  },
+  "Tirol": {
+   "adults": 1240,
+   "adults_with_type_2_diabetes": 110
+  },
+  "Vorarlberg": {
+   "adults": 639,
+   "adults_with_type_2_diabetes": 36
+  },
+  "Wien": {
+   "adults": 3247,
+   "adults_with_type_2_diabetes": 263
+  }
+ },
+ "W05": {
+  "Burgenland": {
+   "adults": 532,
+   "adults_with_type_2_diabetes": 33
+  },
+  "Kärnten": {
+   "adults": 885,
+   "adults_with_type_2_diabetes": 71
+  },
+  "Niederösterreich": {
+   "adults": 2740,
+   "adults_with_type_2_diabetes": 227
+  },
+  "Oberösterreich": {
+   "adults": 2473,
+   "adults_with_type_2_diabetes": 173
+  },
+  "Salzburg": {
+   "adults": 908,
+   "adults_with_type_2_diabetes": 75
+  },
+  "Steiermark": {
+   "adults": 2052,
+   "adults_with_type_2_diabetes": 164
+  },
+  "Tirol": {
+   "adults": 1240,
+   "adults_with_type_2_diabetes": 110
+  },
+  "Vorarlberg": {
+   "adults": 639,
+   "adults_with_type_2_diabetes": 36
+  },
+  "Wien": {
+   "adults": 3247,
+   "adults_with_type_2_diabetes": 263
+  }
+ },
+ "W06": {
+  "Burgenland": {
+   "adults": 532,
+   "adults_with_type_2_diabetes": 33
+  },
+  "Kärnten": {
+   "adults": 885,
+   "adults_with_type_2_diabetes": 71
+  },
+  "Niederösterreich": {
+   "adults": 2740,
+   "adults_with_type_2_diabetes": 227
+  },
+  "Oberösterreich": {
+   "adults": 2473,
+   "adults_with_type_2_diabetes": 173
+  },
+  "Salzburg": {
+   "adults": 908,
+   "adults_with_type_2_diabetes": 75
+  },
+  "Steiermark": {
+   "adults": 2052,
+   "adults_with_type_2_diabetes": 164
+  },
+  "Tirol": {
+   "adults": 1240,
+   "adults_with_type_2_diabetes": 110
+  },
+  "Vorarlberg": {
+   "adults": 639,
+   "adults_with_type_2_diabetes": 36
+  },
+  "Wien": {
+   "adults": 3247,
+   "adults_with_type_2_diabetes": 263
+  }
+ },
+ "W07": {
+  "Burgenland": {
+   "adults": 532,
+   "adults_with_type_2_diabetes": 33
+  },
+  "Kärnten": {
+   "adults": 885,
+   "adults_with_type_2_diabetes": 71
+  },
+  "Niederösterreich": {
+   "adults": 2740,
+   "adults_with_type_2_diabetes": 227
+  },
+  "Oberösterreich": {
+   "adults": 2473,
+   "adults_with_type_2_diabetes": 173
+  },
+  "Salzburg": {
+   "adults": 908,
+   "adults_with_type_2_diabetes": 75
+  },
+  "Steiermark": {
+   "adults": 2052,
+   "adults_with_type_2_diabetes": 164
+  },
+  "Tirol": {
+   "adults": 1240,
+   "adults_with_type_2_diabetes": 110
+  },
+  "Vorarlberg": {
+   "adults": 639,
+   "adults_with_type_2_diabetes": 36
+  },
+  "Wien": {
+   "adults": 3247,
+   "adults_with_type_2_diabetes": 263
+  }
+ },
+ "W09": {
+  "Burgenland": {
+   "adults": 532,
+   "adults_with_type_2_diabetes": 33
+  },
+  "Kärnten": {
+   "adults": 885,
+   "adults_with_type_2_diabetes": 71
+  },
+  "Niederösterreich": {
+   "adults": 2740,
+   "adults_with_type_2_diabetes": 227
+  },
+  "Oberösterreich": {
+   "adults": 2473,
+   "adults_with_type_2_diabetes": 173
+  },
+  "Salzburg": {
+   "adults": 908,
+   "adults_with_type_2_diabetes": 75
+  },
+  "Steiermark": {
+   "adults": 2052,
+   "adults_with_type_2_diabetes": 164
+  },
+  "Tirol": {
+   "adults": 1240,
+   "adults_with_type_2_diabetes": 110
+  },
+  "Vorarlberg": {
+   "adults": 639,
+   "adults_with_type_2_diabetes": 36
+  },
+  "Wien": {
+   "adults": 3247,
+   "adults_with_type_2_diabetes": 263
+  }
+ },
+ "W12": {
+  "Burgenland": {
+   "adults": 532,
+   "adults_with_type_2_diabetes": 33
+  },
+  "Kärnten": {
+   "adults": 885,
+   "adults_with_type_2_diabetes": 71
+  },
+  "Niederösterreich": {
+   "adults": 2740,
+   "adults_with_type_2_diabetes": 227
+  },
+  "Oberösterreich": {
+   "adults": 2473,
+   "adults_with_type_2_diabetes": 173
+  },
+  "Salzburg": {
+   "adults": 908,
+   "adults_with_type_2_diabetes": 75
+  },
+  "Steiermark": {
+   "adults": 2052,
+   "adults_with_type_2_diabetes": 164
+  },
+  "Tirol": {
+   "adults": 1240,
+   "adults_with_type_2_diabetes": 110
+  },
+  "Vorarlberg": {
+   "adults": 639,
+   "adults_with_type_2_diabetes": 36
+  },
+  "Wien": {
+   "adults": 3247,
+   "adults_with_type_2_diabetes": 263
+  }
+ },
+ "W13": {
+  "Burgenland": {
+   "adults": 532,
+   "adults_with_type_2_diabetes": 33
+  },
+  "Kärnten": {
+   "adults": 885,
+   "adults_with_type_2_diabetes": 71
+  },
+  "Niederösterreich": {
+   "adults": 2740,
+   "adults_with_type_2_diabetes": 227
+  },
+  "Oberösterreich": {
+   "adults": 2473,
+   "adults_with_type_2_diabetes": 173
+  },
+  "Salzburg": {
+   "adults": 908,
+   "adults_with_type_2_diabetes": 75
+  },
+  "Steiermark": {
+   "adults": 2052,
+   "adults_with_type_2_diabetes": 164
+  },
+  "Tirol": {
+   "adults": 1240,
+   "adults_with_type_2_diabetes": 110
+  },
+  "Vorarlberg": {
+   "adults": 639,
+   "adults_with_type_2_diabetes": 36
+  },
+  "Wien": {
+   "adults": 3247,
+   "adults_with_type_2_diabetes": 263
+  }
+ },
+ "W14": {
+  "Burgenland": {
+   "adults": 532,
+   "adults_with_type_2_diabetes": 33
+  },
+  "Kärnten": {
+   "adults": 885,
+   "adults_with_type_2_diabetes": 71
+  },
+  "Niederösterreich": {
+   "adults": 2740,
+   "adults_with_type_2_diabetes": 227
+  },
+  "Oberösterreich": {
+   "adults": 2473,
+   "adults_with_type_2_diabetes": 173
+  },
+  "Salzburg": {
+   "adults": 908,
+   "adults_with_type_2_diabetes": 75
+  },
+  "Steiermark": {
+   "adults": 2052,
+   "adults_with_type_2_diabetes": 164
+  },
+  "Tirol": {
+   "adults": 1240,
+   "adults_with_type_2_diabetes": 110
+  },
+  "Vorarlberg": {
+   "adults": 639,
+   "adults_with_type_2_diabetes": 36
+  },
+  "Wien": {
+   "adults": 3247,
+   "adults_with_type_2_diabetes": 263
+  }
+ },
+ "W17": {
+  "Burgenland": {
+   "adults": 532,
+   "adults_with_type_2_diabetes": 33
+  },
+  "Kärnten": {
+   "adults": 885,
+   "adults_with_type_2_diabetes": 71
+  },
+  "Niederösterreich": {
+   "adults": 2740,
+   "adults_with_type_2_diabetes": 227
+  },
+  "Oberösterreich": {
+   "adults": 2473,
+   "adults_with_type_2_diabetes": 173
+  },
+  "Salzburg": {
+   "adults": 908,
+   "adults_with_type_2_diabetes": 75
+  },
+  "Steiermark": {
+   "adults": 2052,
+   "adults_with_type_2_diabetes": 164
+  },
+  "Tirol": {
+   "adults": 1240,
+   "adults_with_type_2_diabetes": 110
+  },
+  "Vorarlberg": {
+   "adults": 639,
+   "adults_with_type_2_diabetes": 36
+  },
+  "Wien": {
+   "adults": 3247,
+   "adults_with_type_2_diabetes": 263
+  }
+ },
+ "W15": {
+  "Klinikum Nord": {
+   "working_age": 4484,
+   "with_htn": 553
+  },
+  "Klinikum Süd": {
+   "working_age": 3925,
+   "with_htn": 496
+  },
+  "Klinikum West": {
+   "working_age": 2733,
+   "with_htn": 367
+  }
+ },
+ "W16": {
+  "Burgenland": {
+   "adults_with_type_2_diabetes": 30
+  },
+  "Kärnten": {
+   "adults_with_type_2_diabetes": 67
+  },
+  "Niederösterreich": {
+   "adults_with_type_2_diabetes": 194
+  },
+  "Oberösterreich": {
+   "adults_with_type_2_diabetes": 161
+  },
+  "Salzburg": {
+   "adults_with_type_2_diabetes": 71
+  },
+  "Steiermark": {
+   "adults_with_type_2_diabetes": 140
+  },
+  "Tirol": {
+   "adults_with_type_2_diabetes": 93
+  },
+  "Vorarlberg": {
+   "adults_with_type_2_diabetes": 32
+  },
+  "Wien": {
+   "adults_with_type_2_diabetes": 241
+  }
+ },
+ "W08": {
+  "Klinikum Nord": {
+   "patients_with_heart_disease": 238
+  },
+  "Klinikum Süd": {
+   "patients_with_heart_disease": 237
+  },
+  "Klinikum West": {
+   "patients_with_heart_disease": 145
+  }
+ }
+}

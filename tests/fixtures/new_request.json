@@ -1,0 +1,19 @@
+{
+  "id": "N01",
+  "submitted": "2026-10-29T20:00:00+01:00",
+  "applicant": {
+    "name": "Dr. Lena Huber",
+    "organisation": "Institute for Health Services Research (university)",
+    "country": "AT"
+  },
+  "requested_as": "health data request",
+  "requested_format": "anonymised statistics",
+  "purpose": "We compare how often heart failure is the main reason for a hospital stay at each hospital to improve discharge planning.",
+  "question": "How many encounters in 2025 had heart failure as the primary diagnosis, per hospital?",
+  "definitions": [
+    "Heart failure encounter = encounter whose primary_icd10 starts with I50.",
+    "Count encounters (not patients) whose start_date is in 2025.",
+    "Report per data_holder: heart failure encounters."
+  ],
+  "contact_email": "unknown field, must be kept"
+}

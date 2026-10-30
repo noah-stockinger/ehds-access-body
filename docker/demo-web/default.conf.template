@@ -1,0 +1,14 @@
+# The tailnet demo (scripts/demo.sh): the built frontend and, under /api, the backend, on one address.
+server {
+    listen ${DEMO_ADDRESS};
+    root /usr/share/nginx/html;
+
+    location /api/ {
+        proxy_pass http://127.0.0.1:${DEMO_API_PORT}/;
+        proxy_read_timeout 180s;  # the hosted models can take a while
+    }
+
+    location / {
+        try_files $uri /index.html;
+    }
+}
